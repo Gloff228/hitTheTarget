@@ -8,8 +8,6 @@ class SpecialLevels : MyActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_special_levels)
-        hideElements()
-        setBackground(selectedBackgroundColor)
     }
 
     fun onClickReturnButton(view: View) {

@@ -1,20 +1,21 @@
 package com.example.application
 
+import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.application.utils.BackgroundColor
+import com.example.application.utils.Settings
+import com.example.application.utils.globalSettings
 
-var selectedBackgroundColor = BackgroundColor.WHITE
-
-enum class BackgroundColor(val rgb: Long) {
-    WHITE(-1),
-    GRAY(0xFF676767),
-    PINK(0xFFFD65F7),
-    RED(0xFFFD6868),
-    BLUE(0xFF5975FF),
-    PURPLE(0xFFC495FF)
-}
 
 open class MyActivity : AppCompatActivity() {
+    val settings: Settings = globalSettings
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setBackgroundColor(settings.backgroundColor)
+        hideElements()
+    }
 
     fun hideElements() {
         window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -23,7 +24,8 @@ open class MyActivity : AppCompatActivity() {
                 or View.SYSTEM_UI_FLAG_FULLSCREEN)
     }
 
-    fun setBackground(color: BackgroundColor) {
+    fun setBackgroundColor(color: BackgroundColor) {
+        globalSettings.backgroundColor = color
         window.decorView.setBackgroundColor(color.rgb.toInt())
     }
 

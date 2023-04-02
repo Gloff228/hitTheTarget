@@ -8,8 +8,6 @@ class SettingsScreen : MyActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings_screen)
-        hideElements()
-        setBackground(selectedBackgroundColor)
     }
 
     fun onClickButtonBackground(view: View) {
@@ -17,7 +15,7 @@ class SettingsScreen : MyActivity() {
     }
 
     fun onClickReturnButton(view: View) {
-        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
     fun onClickButtonColor(view: View) {}

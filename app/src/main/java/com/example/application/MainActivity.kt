@@ -8,8 +8,6 @@ class MainActivity : MyActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        hideElements()
-        setBackground(selectedBackgroundColor)
     }
 
     fun onClickButtonStart(view: View) {

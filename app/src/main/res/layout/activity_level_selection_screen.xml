@@ -53,7 +53,7 @@
                     android:layout_margin="5dp"
                     android:layout_weight="0.5"
                     android:backgroundTint="#B60CDC"
-                    android:onClick="selectLevel1"
+                    android:onClick="onClickLevelButton"
                     android:text="1" />
 
                 <Button
@@ -63,6 +63,7 @@
                     android:layout_margin="5dp"
                     android:layout_weight="0.5"
                     android:backgroundTint="#B60CDC"
+                    android:onClick="onClickLevelButton"
                     android:text="2" />
             </LinearLayout>
 
@@ -80,6 +81,7 @@
                     android:layout_margin="5dp"
                     android:layout_weight="0.5"
                     android:backgroundTint="#B60CDC"
+                    android:onClick="onClickLevelButton"
                     android:text="3" />
 
                 <Button
@@ -89,6 +91,7 @@
                     android:layout_margin="5dp"
                     android:layout_weight="0.5"
                     android:backgroundTint="#B60CDC"
+                    android:onClick="onClickLevelButton"
                     android:text="4" />
             </LinearLayout>
 
@@ -114,6 +117,7 @@
                     android:layout_margin="5dp"
                     android:layout_weight="0.5"
                     android:backgroundTint="#B60CDC"
+                    android:onClick="onClickLevelButton"
                     android:text="6" />
             </LinearLayout>
 
@@ -130,6 +134,7 @@
                     android:layout_margin="5dp"
                     android:layout_weight="0.5"
                     android:backgroundTint="#B60CDC"
+                    android:onClick="onClickLevelButton"
                     android:text="7" />
 
                 <Button
@@ -139,6 +144,7 @@
                     android:layout_margin="5dp"
                     android:layout_weight="0.5"
                     android:backgroundTint="#B60CDC"
+                    android:onClick="onClickLevelButton"
                     android:text="8" />
             </LinearLayout>
 
@@ -155,6 +161,7 @@
                     android:layout_margin="5dp"
                     android:layout_weight="0.5"
                     android:backgroundTint="#B60CDC"
+                    android:onClick="onClickLevelButton"
                     android:text="9" />
 
                 <Button

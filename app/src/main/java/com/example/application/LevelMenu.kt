@@ -8,8 +8,6 @@ class LevelMenu : MyActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_level_menu)
-        hideElements()
-        setBackground(selectedBackgroundColor)
     }
 
     fun onClickReturnButton(view: View) {
