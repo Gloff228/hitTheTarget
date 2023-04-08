@@ -37,7 +37,7 @@ class BackgroundScreen : MyActivity() {
     }
 
     fun onClickButtonSettingsBack(view: View) {
-        startActivity(Intent(this, SettingsScreen::class.java))
+        finish()
     }
 
 }
