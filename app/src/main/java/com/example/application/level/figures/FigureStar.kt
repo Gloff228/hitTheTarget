@@ -1,10 +1,10 @@
 package com.example.application.level.figures
 
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import com.example.application.level.utils.Dot
+import com.example.application.utils.TargetColor
 import kotlin.math.*
 
 open class FigureStar(
@@ -14,13 +14,11 @@ open class FigureStar(
     private val starSize = size.toDouble()
     private val radius = this.starSize / 2
     var center = Dot(x, y)
+    private var color = TargetColor.YELLOW.rgb.toInt()
 
-    private val starPaint = Paint().apply {
-        color = Color.YELLOW
-        style = Paint.Style.FILL
-        isAntiAlias = true
+    init {
+        paint.color = color
     }
-
 
     override fun onClickEvent() {
         this.delete()
@@ -44,11 +42,11 @@ open class FigureStar(
     }
 
     override fun draw(canvas: Canvas) {
-        canvas.drawStar(this.x, this.y, starSize, starPaint)
+        canvas.drawStar(this.x, this.y, starSize, paint)
     }
 
-    private fun Canvas.drawStar(x: Double, y: Double, size: Double, starPaint: Paint) {
-        this.drawCircle(center.x.toFloat(), center.y.toFloat(), radius.toFloat(), paint) // область, в которой будет засчитываться нажатие
+    private fun Canvas.drawStar(x: Double, y: Double, size: Double, paint: Paint) {
+        //this.drawCircle(center.x.toFloat(), center.y.toFloat(), radius.toFloat(), paint) // область, в которой будет засчитываться нажатие
         val path = Path()
         val degreesPerStep = 360 / 5
         val outerRadius = size / 2.0
@@ -68,7 +66,7 @@ open class FigureStar(
             degrees += degreesPerStep
         }
         path.close()
-        drawPath(path, starPaint)
+        drawPath(path, paint)
     }
 
 

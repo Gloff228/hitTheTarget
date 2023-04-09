@@ -6,6 +6,7 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.view.MotionEvent
 import kotlin.random.Random
+import com.example.application.utils.globalSettings
 
 open class FigureBase {
     var x = 0.0
@@ -17,15 +18,16 @@ open class FigureBase {
     var _isExists = true
     var needRedraw = true
 
-    val paint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private var color = Color.RED
+    val paint = Paint().apply {
+        style = Paint.Style.FILL
+        isAntiAlias = true
+    }
 
+    private var color = globalSettings.targetColor.rgb.toInt()
     init {
         paint.color = color
-
         x = Random.nextInt(0, 1500).toDouble()
         y = Random.nextInt(0, 500).toDouble()
-        setColor(-Random.nextInt(0, 16777216))
     }
 
     fun isExists(): Boolean = _isExists
