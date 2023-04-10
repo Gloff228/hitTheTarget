@@ -5,6 +5,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.application.utils.BackgroundColor
 import com.example.application.utils.Settings
+import com.example.application.utils.TargetColor
 import com.example.application.utils.globalSettings
 
 
@@ -27,6 +28,14 @@ open class MyActivity : AppCompatActivity() {
     fun setBackgroundColor(color: BackgroundColor) {
         globalSettings.backgroundColor = color
         window.decorView.setBackgroundColor(color.rgb.toInt())
+    }
+
+    fun setTargetColor(color: TargetColor) {
+        globalSettings.targetColor = color
+    }
+
+    fun setObvodkaColor(color: TargetColor) {
+        globalSettings.targetColor = color
     }
 
     override fun onUserInteraction() {
