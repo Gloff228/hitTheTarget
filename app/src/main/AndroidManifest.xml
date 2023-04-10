@@ -13,6 +13,10 @@
         android:theme="@style/Theme.Application"
         tools:targetApi="31">
         <activity
+            android:name=".level.BubbleLevel"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".TargetColorScreen"
             android:exported="false"
             android:screenOrientation="landscape" />
