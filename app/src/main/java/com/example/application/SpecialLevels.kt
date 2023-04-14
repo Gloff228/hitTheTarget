@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.example.application.level.BubbleLevel
+import com.example.application.level.StarLevel
 
 class SpecialLevels : MyActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,5 +18,9 @@ class SpecialLevels : MyActivity() {
 
     fun onClickSpecialLevelButton(view: View) {
         startActivity(Intent(this, BubbleLevel::class.java))
+    }
+
+    fun onStarButtonClick(view: View) {
+        startActivity(Intent(this, StarLevel::class.java))
     }
 }
