@@ -5,8 +5,6 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
 import android.widget.ImageView
-import android.widget.LinearLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.application.MyActivity
 import com.example.application.R
 
@@ -27,35 +25,6 @@ class StarLevel : MyActivity() {
         val star5 = findViewById<ImageView>(R.id.star5)
         // Создаем список звезд
         stars = mutableListOf(star1, star2, star3, star4, star5)
-
-
-//        val layout = findViewById<ConstraintLayout>(R.id.layout)
-//        val random = java.util.Random()
-//
-//        val stars = arrayOfNulls<ImageView>(maxCount)
-//
-//        for (i in 1..maxCount) {
-//            val star = ImageView(this)
-//            val layoutParams = LinearLayout.LayoutParams(
-//                100, // Ширина
-//                100 // Высота
-//            )
-//            star.layoutParams = layoutParams
-//            star.setImageResource(R.drawable.star)
-//            star.isClickable = true
-//
-//            // устанавливаем случайные координаты звезды
-//            val x = random.nextInt(1000)
-//            val y = random.nextInt(600)
-//            star.x = x.toFloat()
-//            star.y = y.toFloat()
-//
-//            stars[i - 1] = star
-//        }
-//        for (star in stars) {
-//            layout.addView(star)
-//        }
-
 
         fun createAnimation(star: ImageView) {
             val anim = ScaleAnimation(
@@ -82,7 +51,7 @@ class StarLevel : MyActivity() {
                     star.visibility = View.GONE
                     currentStar++
                     if (currentStar <= maxCount) {
-                        createAnimation(stars[currentStar - 1]!!)
+                        createAnimation(stars[currentStar - 1])
                     } else {
                         finish()
                     }
@@ -90,6 +59,6 @@ class StarLevel : MyActivity() {
             }
         }
 
-        createAnimation(stars[0]!!)
+        createAnimation(stars[0])
     }
 }
