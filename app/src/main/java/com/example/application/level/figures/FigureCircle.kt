@@ -13,8 +13,10 @@ open class FigureCircle(
     var center = Dot(x + radius, y + radius)
 
     override fun onClickEvent() {
-        this.delete()
-        println("Clicked")
+        if (isActive) {
+            this.delete()
+            println("Deleted")
+        }
     }
 
     override fun setPosition(x: Number, y: Number) {
@@ -34,6 +36,11 @@ open class FigureCircle(
     }
 
     override fun draw(canvas: Canvas) {
-        canvas.drawCircle(center.x.toFloat(), center.y.toFloat(), radius.toFloat(), paint)
+        // TODO it is bad solution. Need to update for outlines
+        var radiusToDraw = radius
+        if (!isActive) {
+             radiusToDraw *= 0.5
+        }
+        canvas.drawCircle(center.x.toFloat(), center.y.toFloat(), radiusToDraw.toFloat(), paint)
     }
 }

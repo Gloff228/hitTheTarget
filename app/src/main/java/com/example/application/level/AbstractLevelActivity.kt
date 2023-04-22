@@ -11,9 +11,11 @@ import com.example.application.level.figures.FigureBase
 
 
 open class AbstractLevelActivity : MyActivity(), SurfaceHolder.Callback2 {
-    private val FPS = 60
+    companion object {
+        const val FPS = 60
+        const val frameDurationMs = 1000 / FPS
+    }
 
-    private val frameDurationMs = 1000 / FPS
 
     private val lock = Object()
     @Volatile var canRun = false
@@ -21,7 +23,8 @@ open class AbstractLevelActivity : MyActivity(), SurfaceHolder.Callback2 {
 
     lateinit var surface: SurfaceView
 
-    var figures = mutableListOf<FigureBase>()
+    var figures = ArrayDeque<FigureBase>()
+    var needRedraw = true
 
     @RequiresApi(Build.VERSION_CODES.O)
     private var drawingThread = Thread {
@@ -50,36 +53,26 @@ open class AbstractLevelActivity : MyActivity(), SurfaceHolder.Callback2 {
         }
     }
 
-    private fun calculateNewFrame(startTime: Long): Boolean {
-        /** Returns true, if redraw is needed after calculations */
-
-        lateinit var figure: FigureBase
-        var needRedraw = false
-        for (i in figures.size - 1 downTo 0) {
-            figure = figures[i]
-            if (figure.isExists()) {
-                figure.calculateNewFrame(startTime)
-            }
-
+    private fun calculateNewFrame(startTime: Long) {
+        /** Make calculations before drawing new frame (for example, if we need to move figure) */
+        for (figure in figures.reversed()) {
+            figure.calculateNewFrame(startTime)
             if (figure.needRedraw) {
                 needRedraw = true
                 figure.needRedraw = false
             }
         }
-        return needRedraw
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun drawNewFrame() {
-        println("Redraw")
+        println("Redraw")  // TODO debug
         val canvas = surface.holder.lockCanvas()
         if (canvas != null) {
             canvas.drawColor(settings.backgroundColor.rgb.toInt())
             // canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
             for (figure in figures) {
-                if (figure.isExists()) {
-                    figure.draw(canvas)
-                }
+                figure.draw(canvas)
             }
         }
         surface.holder.unlockCanvasAndPost(canvas)
@@ -87,15 +80,12 @@ open class AbstractLevelActivity : MyActivity(), SurfaceHolder.Callback2 {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun handleNewFrame(startTime: Long) {
-        val needRedraw = calculateNewFrame(startTime)
+        calculateNewFrame(startTime)
         onHandlingNewFrame()
         if (needRedraw) {
             drawNewFrame()
+            needRedraw = false
         }
-    }
-
-    open fun onHandlingNewFrame() {
-        // pass
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -134,9 +124,7 @@ open class AbstractLevelActivity : MyActivity(), SurfaceHolder.Callback2 {
         if (event === null) return true
 
         var touchReached = false
-        for (i in figures.size - 1 downTo 0) {
-            val figure = figures[i]
-            if (!figure.isExists()) continue
+        for (figure in figures.reversed()) {
             if (figure.handleTouchEvent(event, touchReached)) {
                 touchReached = true
             }
@@ -169,13 +157,30 @@ open class AbstractLevelActivity : MyActivity(), SurfaceHolder.Callback2 {
         // pass
     }
 
-    fun clearRubbishFigures() {
-        /** Deleting figures by one at a time is quite slow operation.
-         *  It's better to remain some rubbish figures and then delete them
-         *  all at once after some time
-         * */
-        figures = figures.filter { figure -> figure.isExists() }.toMutableList()
+    fun setNewActiveFigure() {
+        /** When player passed last active figure (clicked on it),
+         *  and we need to get new active figure (and to delete last active figure)
+         *  */
+        figures.removeLast()
+        if (figures.isNotEmpty()) {
+            figures.last().setActive()
+            needRedraw = true
+        } else {
+            finishLevel()
+        }
     }
 
+    /** Ниже функции, которые можно переопределять для описания своего уровня */
 
+    open fun onHandlingNewFrame() {
+        // redefine this
+        // called on creating new frame - after calculating and before drawing
+    }
+
+    open fun finishLevel() {
+        // redefine this
+        // For example, show modal with results.
+
+        finish() // close LevelActivity
+    }
 }

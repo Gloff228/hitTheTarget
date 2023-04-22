@@ -7,175 +7,61 @@
     android:screenOrientation="landscape"
     tools:context=".LevelSelectionScreen">
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbarAlwaysDrawHorizontalTrack="false"
-        android:scrollbars="none"
+        android:text="Обычный уровень"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toBottomOf="@+id/returnButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.95">
+        app:layout_constraintTop_toBottomOf="@+id/returnButton"
+        android:paddingHorizontal="10dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical">
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="15dp">
 
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Выбери\nуровень"
+                android:text="Настройки:"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="48sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.161" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/button2"
-                    android:layout_width="0dp"
-                    android:layout_height="300dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="0.5"
-                    android:backgroundTint="#B60CDC"
-                    android:onClick="onClickLevelButton"
-                    android:text="1" />
-
-                <Button
-                    android:id="@+id/button3"
-                    android:layout_width="0dp"
-                    android:layout_height="300dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="0.5"
-                    android:backgroundTint="#B60CDC"
-                    android:onClick="onClickLevelButton"
-                    android:text="2" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/button4"
-                    android:layout_width="0dp"
-                    android:layout_height="300dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="0.5"
-                    android:backgroundTint="#B60CDC"
-                    android:onClick="onClickLevelButton"
-                    android:text="3" />
-
-                <Button
-                    android:id="@+id/button5"
-                    android:layout_width="0dp"
-                    android:layout_height="300dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="0.5"
-                    android:backgroundTint="#B60CDC"
-                    android:onClick="onClickLevelButton"
-                    android:text="4" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/button6"
-                    android:layout_width="0dp"
-                    android:layout_height="300dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="0.5"
-                    android:backgroundTint="#B60CDC"
-                    android:text="Специальный уровень" />
-
-                <Button
-                    android:id="@+id/button7"
-                    android:layout_width="0dp"
-                    android:layout_height="300dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="0.5"
-                    android:backgroundTint="#B60CDC"
-                    android:onClick="onClickLevelButton"
-                    android:text="6" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/button8"
-                    android:layout_width="0dp"
-                    android:layout_height="300dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="0.5"
-                    android:backgroundTint="#B60CDC"
-                    android:onClick="onClickLevelButton"
-                    android:text="7" />
-
-                <Button
-                    android:id="@+id/button9"
-                    android:layout_width="0dp"
-                    android:layout_height="300dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="0.5"
-                    android:backgroundTint="#B60CDC"
-                    android:onClick="onClickLevelButton"
-                    android:text="8" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/button10"
-                    android:layout_width="0dp"
-                    android:layout_height="300dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="0.5"
-                    android:backgroundTint="#B60CDC"
-                    android:onClick="onClickLevelButton"
-                    android:text="9" />
-
-                <Button
-                    android:id="@+id/button11"
-                    android:layout_width="0dp"
-                    android:layout_height="300dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="0.5"
-                    android:backgroundTint="#B60CDC"
-                    android:text="Специальный уровень" />
-            </LinearLayout>
+                android:textSize="36sp">
+            </TextView>
 
         </LinearLayout>
-    </ScrollView>
+
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="0.5"
+            android:backgroundTint="#B60CDC"
+            android:onClick="onClickStartLevelButton"
+            android:text="Старт" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/returnButton"

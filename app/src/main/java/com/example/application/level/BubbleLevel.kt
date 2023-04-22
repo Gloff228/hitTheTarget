@@ -42,7 +42,7 @@ class BubbleLevel: MyActivity() {
         }
 
 
-        fun animate(i: Int){
+        fun animate(i: Int) {
             animator.duration = 3000
             animator.start()
 
