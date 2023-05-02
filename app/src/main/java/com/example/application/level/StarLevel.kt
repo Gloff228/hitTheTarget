@@ -6,6 +6,7 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
 import android.widget.ImageView
+import android.widget.ScrollView
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -66,6 +67,7 @@ class StarLevel : MyActivity() {
         }
         createAnimation(stars[currentStar])
     }
+
     private fun createAnimation(star: ImageView) {
         val anim = ScaleAnimation(
             1f, starSettings.scale, 1f, starSettings.scale,
@@ -101,20 +103,18 @@ class StarLevel : MyActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_star_level)
+    private fun createCountSeekBar() {
+        val countSeekBar = findViewById<SeekBar>(R.id.seekBar)
+        countSeekBar.min = 3
+        countSeekBar.max = 50
+        countSeekBar.progress = starSettings.maxCount
 
-        val seekBar = findViewById<SeekBar>(R.id.seekBar)
-        seekBar.progress = 50 // устанавливаем начальное положение на середину
-        seekBar.min = 3
-        seekBar.max = 50
+        val countTextView = findViewById<TextView>(R.id.textView1)
+        countTextView.text = "Count\n${countSeekBar.progress}"
 
-        val textView1 = findViewById<TextView>(R.id.textView1)
-
-        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        countSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                textView1.text = "Count\n$progress"
+                countTextView.text = "Count\n$progress"
                 starSettings.maxCount = progress
             }
 
@@ -123,5 +123,86 @@ class StarLevel : MyActivity() {
         })
     }
 
-    fun onClickButtonCreate(view: View) { drawStars() }
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun createSizeSeekBar() {
+        val sizeSeekBar = findViewById<SeekBar>(R.id.seekBar2)
+        sizeSeekBar.min = 5
+        sizeSeekBar.max = 200
+        sizeSeekBar.progress = starSettings.size
+
+        val countTextView = findViewById<TextView>(R.id.textView2)
+        countTextView.text = "Size\n${sizeSeekBar.progress}"
+
+        sizeSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                countTextView.text = "Size\n$progress"
+                starSettings.size = progress
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun createScaleSeekBar() {
+        val scaleSeekBar = findViewById<SeekBar>(R.id.seekBar3)
+        scaleSeekBar.min = 2
+        scaleSeekBar.max = 10
+        scaleSeekBar.progress = starSettings.scale.toInt()
+
+        val countTextView = findViewById<TextView>(R.id.textView3)
+        countTextView.text = "Scale\n${scaleSeekBar.progress}"
+
+        scaleSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                countTextView.text = "Scale\n$progress"
+                starSettings.scale = progress.toFloat()
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun createDurationSeekBar() {
+        val sizeSeekBar = findViewById<SeekBar>(R.id.seekBar4)
+        sizeSeekBar.min = 100
+        sizeSeekBar.max = 5000
+        sizeSeekBar.progress = starSettings.duration.toInt()
+
+        val countTextView = findViewById<TextView>(R.id.textView4)
+        countTextView.text = "Duration\n${sizeSeekBar.progress}"
+
+        sizeSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                countTextView.text = "Duration\n$progress"
+                starSettings.duration = progress.toLong()
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_star_level)
+        createCountSeekBar()
+        createSizeSeekBar()
+        createScaleSeekBar()
+        createDurationSeekBar()
+    }
+
+    fun onClickButtonCreate(view: View) {
+        findViewById<ScrollView>(R.id.scrollView).visibility = View.GONE
+        findViewById<ImageView>(R.id.returnButton).visibility = View.GONE
+        drawStars()
+    }
+
+    fun onClickReturnButton(view: View) {
+        finish()
+    }
 }
