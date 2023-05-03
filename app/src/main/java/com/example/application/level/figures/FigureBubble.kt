@@ -10,7 +10,6 @@ class FigureBubble(img: Bitmap): FigureBase() {
 
     init {
         resetPosition()
-        x = arrangeX().toDouble()
     }
 
     fun getBubble() = bubble
