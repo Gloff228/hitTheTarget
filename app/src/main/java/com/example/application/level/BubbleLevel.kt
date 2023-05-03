@@ -1,62 +1,75 @@
 package com.example.application.level
 
+import android.graphics.*
+import android.os.Build
 import android.os.Bundle
-import android.animation.ObjectAnimator
-import android.annotation.SuppressLint
-import android.view.View
-import android.widget.ImageView
-import com.example.application.MyActivity
+import android.view.SurfaceHolder
+import androidx.annotation.RequiresApi
 import com.example.application.R
-import kotlin.math.floor
+import com.example.application.level.figures.FigureBubble
 
-class BubbleLevel: MyActivity() {
 
-    private fun getRandomNumber(range: IntRange) = floor(Math.random() * (range.last - range.first + 1))
-    private val countBurstBubbles = 20
+class BubbleLevel: AbstractLevelActivity() {
 
-    @SuppressLint("MissingInflatedId")
-    override fun onCreate(savedInstanceState: Bundle?) {
+    private lateinit var bubbleList: MutableList<FigureBubble>
+    lateinit var currentBubble: FigureBubble
+
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bubblelevel)
 
-        val heightScreen = resources.displayMetrics.heightPixels
-        val widthScreen = resources.displayMetrics.widthPixels
-        val imageView = findViewById<ImageView>(R.id.imageView)
-        val animator = ObjectAnimator.ofFloat(imageView, View.TRANSLATION_Y, heightScreen.toFloat(), 0f)
+        surface = findViewById(R.id.bubSurface)
+        surface.holder.addCallback(this)
+    }
 
+    override fun onResume() {
+        super.onResume()
 
-        fun getRandomDrawableNumber(): Int {
-            val array = arrayOf(
-                R.drawable.bubble_first, R.drawable.bubble_second, R.drawable.bubble_third,
-                R.drawable.bubble_fourth, R.drawable.bubble_fifth
-            )
-            return array[getRandomNumber(array.indices).toInt()]
-        }
+        val bubble1 = BitmapFactory.decodeResource(this.resources, R.drawable.bubble_first)
+        val bubble2 = BitmapFactory.decodeResource(this.resources, R.drawable.bubble_second)
+        val bubble3 = BitmapFactory.decodeResource(this.resources, R.drawable.bubble_third)
+        val bubble4 = BitmapFactory.decodeResource(this.resources, R.drawable.bubble_fourth)
+        val bubble5 = BitmapFactory.decodeResource(this.resources, R.drawable.bubble_fifth)
 
-        fun getImage() {
-            return imageView.setImageResource(getRandomDrawableNumber())
-        }
+        bubbleList = mutableListOf(
+            FigureBubble(Bitmap.createScaledBitmap(bubble1, 350, 350, false)),
+            FigureBubble(Bitmap.createScaledBitmap(bubble2, 350, 350, false)),
+            FigureBubble(Bitmap.createScaledBitmap(bubble3, 350, 350, false)),
+            FigureBubble(Bitmap.createScaledBitmap(bubble4, 350, 350, false)),
+            FigureBubble(Bitmap.createScaledBitmap(bubble5, 350, 350, false)),
+        )
+    }
 
-        fun arrangeX() {
-            imageView.x = (getRandomNumber(150..widthScreen-150)).toFloat()
-        }
-
-
-        fun animate(i: Int) {
-            animator.duration = 3000
-            animator.start()
-
-            imageView.setOnClickListener {
-                animator.end()
-                if (i < countBurstBubbles - 1)
-                    animate(i+1)
-                else animator.cancel()
+    override fun surfaceCreated(surfaceHolder: SurfaceHolder) {
+        canRun = true
+        val threadDraw = Thread {
+            while (canRun) {
+                draw(surfaceHolder)
+                Thread.sleep(5)
             }
-
-            getImage()
-            arrangeX()
         }
+        threadDraw.start()
+    }
 
-        animate(0)
+    private fun draw(holder: SurfaceHolder) {
+        val canvas = holder.lockCanvas()
+
+        currentBubble = bubbleList[0]
+
+        if (canvas != null) {
+            canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
+            currentBubble.move()
+
+            if (currentBubble.y < -currentBubble.getBubbleHeight()) {
+                currentBubble.resetPosition()
+                bubbleList.add(currentBubble)
+                bubbleList.removeAt(0)
+
+            } else currentBubble.draw(canvas)
+
+        }
+        holder.unlockCanvasAndPost(canvas)
     }
 }
