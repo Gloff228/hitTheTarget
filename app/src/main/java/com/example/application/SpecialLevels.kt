@@ -3,7 +3,7 @@ package com.example.application
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import com.example.application.level.BubbleLevel
+import com.example.application.level.bubblelevel.BubbleLevel
 import com.example.application.level.StarLevel
 
 class SpecialLevels : MyActivity() {
@@ -16,7 +16,7 @@ class SpecialLevels : MyActivity() {
         startActivity(Intent(this, LevelMenu::class.java))
     }
 
-    fun onClickSpecialLevelButton(view: View) {
+    fun onBubbleButtonButton(view: View) {
         startActivity(Intent(this, BubbleLevel::class.java))
     }
 

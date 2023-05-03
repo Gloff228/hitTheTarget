@@ -1,16 +1,15 @@
-package com.example.application.level
+package com.example.application.level.bubblelevel
 
+import android.content.Intent
 import android.graphics.*
-import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.MotionEvent
 import android.view.SurfaceHolder
-import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import com.example.application.R
+import com.example.application.level.AbstractLevelActivity
 import com.example.application.level.figures.FigureBubble
 
 
@@ -18,6 +17,8 @@ class BubbleLevel: AbstractLevelActivity() {
 
     private lateinit var bubbleList: MutableList<FigureBubble>
     lateinit var currentBubble: FigureBubble
+    private val numberBubbles = 35
+    var counterBubbles = 0
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -51,8 +52,12 @@ class BubbleLevel: AbstractLevelActivity() {
         canRun = true
         Thread {
             while (canRun) {
-                draw(surfaceHolder)
-                Thread.sleep(5)
+                try {
+                    draw(surfaceHolder)
+                    Thread.sleep(5)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
         }.start()
     }
@@ -89,15 +94,32 @@ class BubbleLevel: AbstractLevelActivity() {
 
                 if (Color.alpha(pixel) != 0) {
                     resetPosition()
+                    updateCounter()
                     return true
                 }
             }
         }
         return false
     }
+
     private fun resetPosition() {
         currentBubble.resetPosition()
         bubbleList.add(currentBubble)
         bubbleList.removeAt(0)
+    }
+
+    private fun updateCounter() {
+        val textOfCounter = findViewById<TextView>(R.id.counterText)
+
+        if (counterBubbles < numberBubbles - 1) {
+            counterBubbles++
+            textOfCounter.text = "${counterBubbles}/${numberBubbles}"
+        } else finishLevel()
+    }
+
+    override fun finishLevel() {
+        //val intent = Intent(this, VictoryScreen::class.java)
+        //startActivity(intent)
+        finish()
     }
 }
