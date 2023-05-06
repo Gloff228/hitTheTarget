@@ -17,7 +17,15 @@
             android:screenOrientation="landscape"
             android:exported="false" />
         <activity
-            android:name=".level.BubbleLevel"
+            android:name=".level.bubblelevel.BubbleVictoryScreen"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".level.bubblelevel.BubbleSettings"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".level.bubblelevel.BubbleLevel"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
