@@ -1,17 +1,14 @@
 package com.example.application.level.bubblelevel
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.SeekBar
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import com.example.application.MyActivity
 import com.example.application.R
 import com.example.application.SpecialLevels
-import org.w3c.dom.Text
+
 
 internal var coefficientForSize = 0
 internal var numberBubbles = 0

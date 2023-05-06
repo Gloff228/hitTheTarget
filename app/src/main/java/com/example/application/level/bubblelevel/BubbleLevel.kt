@@ -7,12 +7,13 @@ import android.os.Build
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.SurfaceHolder
+import android.view.View
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import com.example.application.R
 import com.example.application.level.AbstractLevelActivity
 import com.example.application.level.figures.FigureBubble
-import org.w3c.dom.Text
+
 
 
 class BubbleLevel: AbstractLevelActivity() {
@@ -130,5 +131,9 @@ class BubbleLevel: AbstractLevelActivity() {
     override fun finishLevel() {
         startActivity(Intent(this, BubbleVictoryScreen::class.java))
         finish()
+    }
+
+    fun onClickReturnButton(view: View) {
+        startActivity(Intent(this, BubbleSettings::class.java))
     }
 }
