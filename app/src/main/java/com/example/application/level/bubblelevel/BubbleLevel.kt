@@ -1,11 +1,13 @@
 package com.example.application.level.bubblelevel
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.*
 import android.os.Build
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.SurfaceHolder
+import android.view.View
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import com.example.application.R
@@ -13,21 +15,23 @@ import com.example.application.level.AbstractLevelActivity
 import com.example.application.level.figures.FigureBubble
 
 
+
 class BubbleLevel: AbstractLevelActivity() {
 
     private lateinit var bubbleList: MutableList<FigureBubble>
     lateinit var currentBubble: FigureBubble
-    private val numberBubbles = 35
-    var counterBubbles = 0
-
+    private val bubbleSize = 4 * coefficientForSize + 350
+    var bubbleCounter = 0
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bubblelevel)
 
+        setCounter()
         surface = findViewById(R.id.bubSurface)
         surface.holder.addCallback(this)
+        surface.holder.setFormat(PixelFormat.RGBA_8888)
     }
 
     override fun onResume() {
@@ -40,11 +44,11 @@ class BubbleLevel: AbstractLevelActivity() {
         val bubble5 = BitmapFactory.decodeResource(this.resources, R.drawable.bubble_fifth)
 
         bubbleList = mutableListOf(
-            FigureBubble(Bitmap.createScaledBitmap(bubble1, 350, 350, false)),
-            FigureBubble(Bitmap.createScaledBitmap(bubble2, 350, 350, false)),
-            FigureBubble(Bitmap.createScaledBitmap(bubble3, 350, 350, false)),
-            FigureBubble(Bitmap.createScaledBitmap(bubble4, 350, 350, false)),
-            FigureBubble(Bitmap.createScaledBitmap(bubble5, 350, 350, false)),
+            FigureBubble(Bitmap.createScaledBitmap(bubble1, bubbleSize, bubbleSize, false)),
+            FigureBubble(Bitmap.createScaledBitmap(bubble2, bubbleSize, bubbleSize, false)),
+            FigureBubble(Bitmap.createScaledBitmap(bubble3, bubbleSize, bubbleSize, false)),
+            FigureBubble(Bitmap.createScaledBitmap(bubble4, bubbleSize, bubbleSize, false)),
+            FigureBubble(Bitmap.createScaledBitmap(bubble5, bubbleSize, bubbleSize, false)),
         )
     }
 
@@ -53,7 +57,7 @@ class BubbleLevel: AbstractLevelActivity() {
         Thread {
             while (canRun) {
                 try {
-                    draw(surfaceHolder)
+                    drawNewFrame(surfaceHolder)
                     Thread.sleep(5)
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -62,7 +66,7 @@ class BubbleLevel: AbstractLevelActivity() {
         }.start()
     }
 
-    private fun draw(holder: SurfaceHolder) {
+    private fun drawNewFrame(holder: SurfaceHolder) {
         val canvas = holder.lockCanvas()
 
         currentBubble = bubbleList[0]
@@ -108,18 +112,28 @@ class BubbleLevel: AbstractLevelActivity() {
         bubbleList.removeAt(0)
     }
 
+    @SuppressLint("SetTextI18n")
+    fun setCounter() {
+        val textOfCounter = findViewById<TextView>(R.id.counterText)
+        textOfCounter.text = "0/${numberBubbles}"
+    }
+
+    @SuppressLint("SetTextI18n")
     private fun updateCounter() {
         val textOfCounter = findViewById<TextView>(R.id.counterText)
 
-        if (counterBubbles < numberBubbles - 1) {
-            counterBubbles++
-            textOfCounter.text = "${counterBubbles}/${numberBubbles}"
+        if (bubbleCounter < numberBubbles - 1) {
+            bubbleCounter++
+            textOfCounter.text = "${bubbleCounter}/${numberBubbles}"
         } else finishLevel()
     }
 
     override fun finishLevel() {
-        //val intent = Intent(this, VictoryScreen::class.java)
-        //startActivity(intent)
+        startActivity(Intent(this, BubbleVictoryScreen::class.java))
         finish()
+    }
+
+    fun onClickReturnButton(view: View) {
+        startActivity(Intent(this, BubbleSettings::class.java))
     }
 }

@@ -2,10 +2,11 @@ package com.example.application.level.figures
 
 import android.content.res.Resources
 import android.graphics.*
+import com.example.application.level.bubblelevel.coefficientForSpeed
 
 class FigureBubble(img: Bitmap): FigureBase() {
 
-    private var bubbleSpeed = 10
+    private var bubbleSpeed = 5 + coefficientForSpeed
     private val bubble = img
 
     init {
@@ -14,7 +15,7 @@ class FigureBubble(img: Bitmap): FigureBase() {
 
     fun getBubble() = bubble
 
-    fun getBubbleWidth() = bubble.width
+    private fun getBubbleWidth() = bubble.width
 
     fun getBubbleHeight() = bubble.height
 
