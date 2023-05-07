@@ -1,5 +1,6 @@
 package com.example.application.level
 
+import android.graphics.Canvas
 import android.graphics.PixelFormat
 import android.os.Build
 import android.os.Bundle
@@ -69,7 +70,7 @@ open class AbstractLevelActivity : MyActivity(), SurfaceHolder.Callback2 {
         println("Redraw")  // TODO debug
         val canvas = surface.holder.lockCanvas()
         if (canvas != null) {
-            canvas.drawColor(settings.backgroundColor.rgb.toInt())
+            setBackgroundColor(canvas)
             // canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
             for (figure in figures) {
                 figure.draw(canvas)
@@ -86,6 +87,11 @@ open class AbstractLevelActivity : MyActivity(), SurfaceHolder.Callback2 {
             drawNewFrame()
             needRedraw = false
         }
+    }
+
+
+    open fun setBackgroundColor(canvas: Canvas) {
+        canvas.drawColor(settings.backgroundColor.rgb.toInt())
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
