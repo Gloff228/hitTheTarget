@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import com.example.application.level.CommonLevelActivity
+import com.example.application.level.CommonLevelSettingsActivity
 
 class LevelSelectionScreen : MyActivity() {
 
@@ -17,19 +18,7 @@ class LevelSelectionScreen : MyActivity() {
         finish()
     }
 
-    fun startLevel() {
-        val CLICK_TIME = 30_000 // 30 seconds // TODO get from settings
-        val FIGURES_NUMBER = 5  // TODO get from settings
-        val FIGURE_SIZE = 300  // TODO get from settings
-
-        val intent = Intent(this, CommonLevelActivity::class.java)
-        intent.putExtra(CommonLevelActivity.PARAM_CLICK_TIME, CLICK_TIME)
-        intent.putExtra(CommonLevelActivity.PARAM_FIGURES_NUMBER, FIGURES_NUMBER)
-        intent.putExtra(CommonLevelActivity.PARAM_FIGURE_SIZE, FIGURE_SIZE)
-        startActivity(intent)
-    }
-
     fun onClickStartLevelButton(view: View) {
-        startLevel()
+        startActivity(Intent(this, CommonLevelSettingsActivity::class.java))
     }
 }

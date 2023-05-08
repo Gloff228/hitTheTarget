@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/stars_background"
-    tools:context=".level.StarLevel">
+    tools:context=".level.StarLevel"
+    android:screenOrientation="landscape">
 
     <ScrollView
         android:id="@+id/scrollView"

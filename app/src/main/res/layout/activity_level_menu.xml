@@ -22,8 +22,8 @@
             android:layout_height="400dp"
             android:layout_margin="5dp"
             android:layout_weight="0.5"
-            android:onClick="defaultButton"
-            android:text="Все уровни" />
+            android:onClick="commonLevelButton"
+            android:text="Обычный уровень" />
 
         <Button
             android:id="@+id/button12"

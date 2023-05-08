@@ -21,5 +21,5 @@ class SettingsScreen : MyActivity() {
     fun onClickButtonColor(view: View) {
         startActivity(Intent(this, TargetColorScreen::class.java))
     }
-    fun onClickButtonObvodka(view: View) {}
+    fun onClickButtonOutline(view: View) {}
 }

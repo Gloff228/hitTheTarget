@@ -14,8 +14,6 @@ import com.example.application.R
 import com.example.application.level.AbstractLevelActivity
 import com.example.application.level.figures.FigureBubble
 
-
-
 class BubbleLevel: AbstractLevelActivity() {
 
     private lateinit var bubbleList: MutableList<FigureBubble>
