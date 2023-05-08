@@ -14,8 +14,13 @@ open class MyActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setBackgroundColor(settings.backgroundColor)
+
         hideElements()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        setBackgroundColor(settings.backgroundColor)
     }
 
     fun hideElements() {
