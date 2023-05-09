@@ -39,8 +39,8 @@ open class MyActivity : AppCompatActivity() {
         globalSettings.targetColor = color
     }
 
-    fun setObvodkaColor(color: TargetColor) {
-        globalSettings.targetColor = color
+    fun setOutlineColor(color: TargetColor) {
+        globalSettings.outlineColor = color
     }
 
     override fun onUserInteraction() {

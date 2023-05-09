@@ -21,5 +21,7 @@ class SettingsScreen : MyActivity() {
     fun onClickButtonColor(view: View) {
         startActivity(Intent(this, TargetColorScreen::class.java))
     }
-    fun onClickButtonOutline(view: View) {}
+    fun onClickButtonOutline(view: View) {
+        startActivity(Intent(this, OutlineColorScreen::class.java))
+    }
 }

@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BackgroundScreen">
+    tools:context=".TargetColorScreen">
+
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="Выбери фон"
+        android:text="Выбери цвет обводки"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="48sp"
@@ -51,7 +52,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:backgroundTint="@color/background_gray"
+                android:backgroundTint="@color/gray"
                 android:onClick="selectGray"
                 android:textSize="20sp" />
 
@@ -61,7 +62,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:backgroundTint="@color/background_pink"
+                android:backgroundTint="@color/pink"
                 android:onClick="selectPink"
                 android:textSize="20sp" />
         </LinearLayout>
@@ -78,7 +79,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:backgroundTint="@color/background_red"
+                android:backgroundTint="@color/red"
                 android:onClick="selectRed"
                 android:textSize="20sp" />
 
@@ -88,7 +89,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:backgroundTint="@color/background_blue"
+                android:backgroundTint="@color/blue"
                 android:onClick="selectBlue"
                 android:textSize="20sp" />
 
@@ -98,7 +99,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:backgroundTint="@color/background_purple"
+                android:backgroundTint="@color/purple"
                 android:onClick="selectPurple"
                 android:textSize="20sp" />
         </LinearLayout>
@@ -115,7 +116,8 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="7"
+                android:backgroundTint="@color/yellow"
+                android:onClick="selectYellow"
                 android:textSize="20sp" />
 
             <Button
@@ -124,7 +126,8 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="8"
+                android:backgroundTint="@color/green"
+                android:onClick="selectGreen"
                 android:textSize="20sp" />
 
             <Button
@@ -137,6 +140,7 @@
                 android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
+
 
     <ImageView
         android:id="@+id/imageView8"
