@@ -67,6 +67,7 @@ open class AbsLevelSettingsActivity: MyActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     private fun updateSettingViews() {
         for (i in settingViews.indices) {
@@ -74,16 +75,30 @@ open class AbsLevelSettingsActivity: MyActivity() {
             val views = settingViews[i]
 
             views.nameView.text = settingsItem.name
-            views.valueView.text = settingsItem.startValue.toString()
+            if (settingsItem.name == "Длительность")
+                views.valueView.text = "${settingsItem.startValue / 10}.${settingsItem.startValue % 10}"
+            else
+                views.valueView.text = settingsItem.startValue.toString()
             views.seekBar.min = settingsItem.minValue / settingsItem.step
             views.seekBar.max = settingsItem.maxValue / settingsItem.step
             views.seekBar.progress = settingsItem.startValue / settingsItem.step
 
             views.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                @SuppressLint("SetTextI18n")
                 override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                    /** Костыль для длительности
+                     *  Задавайте её значение 0.1 = 1. Например 1.3 секунды записывайте как 13,
+                     *  а 2 секунды как 20.
+                     *  Соответствено, min значение для 0.5 секунд = 5.
+                     *  Такая штука будет работать только при name="Длительность"
+                     *
+                     * */
                     val actualProgress = progress * settingsItem.step
                     resultSettings[settingsItem.name] = actualProgress
-                    views.valueView.text = actualProgress.toString()
+                    if (settingsItem.name == "Длительность")
+                        views.valueView.text = "${actualProgress / 10}.${actualProgress % 10}"
+                    else
+                        views.valueView.text = actualProgress.toString()
                 }
 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {}
