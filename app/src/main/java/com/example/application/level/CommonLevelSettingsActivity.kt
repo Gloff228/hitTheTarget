@@ -13,7 +13,7 @@ class CommonLevelSettingsActivity: AbsLevelSettingsActivity() {
     override val SETTINGS = listOf(
         LevelSettingsItem(PARAM_FIGURES_NUMBER, 3,50, 1, 10),
         LevelSettingsItem(PARAM_FIGURE_SIZE, 100,800, 5, 400),
-        LevelSettingsItem(PARAM_CLICK_TIME, 100, 30_000, 50, 5000),
+        LevelSettingsItem(PARAM_CLICK_TIME, 5, 300, 1, 50),
     )
 
     override fun getLevelIntent(): Intent {

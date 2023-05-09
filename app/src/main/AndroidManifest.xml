@@ -49,10 +49,6 @@
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".Level1"
-            android:exported="false"
-            android:screenOrientation="landscape" />
-        <activity
             android:name=".LevelSelectionScreen"
             android:exported="false"
             android:screenOrientation="landscape" />

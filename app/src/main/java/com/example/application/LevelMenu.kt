@@ -12,7 +12,7 @@ class LevelMenu : MyActivity() {
     }
 
     fun onClickReturnButton(view: View) {
-        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
     fun commonLevelButton(view: View) {
