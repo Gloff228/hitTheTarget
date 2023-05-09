@@ -4,6 +4,7 @@ import android.graphics.Canvas
 import android.graphics.PixelFormat
 import android.os.Build
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.*
 import androidx.annotation.RequiresApi
 import com.example.application.MyActivity
@@ -23,6 +24,9 @@ open class AbstractLevelActivity : MyActivity(), SurfaceHolder.Callback2 {
     @Volatile var threadQuit = false
 
     lateinit var surface: SurfaceView
+
+    var WIDTH = 0
+    var HEIGHT = 0
 
     var figures = ArrayDeque<FigureBase>()
     var needRedraw = true
@@ -103,12 +107,18 @@ open class AbstractLevelActivity : MyActivity(), SurfaceHolder.Callback2 {
         } else {
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         }
-        setContentView(R.layout.activity_abstract_level)
+
+        loadContentView()
 
         surface = findViewById(R.id.surface)
         surface.holder.addCallback(this)
         surface.holder.setFormat(PixelFormat.RGBA_8888)
         drawingThread.start()
+
+        val displayMetrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
+        HEIGHT = displayMetrics.heightPixels
+        WIDTH = displayMetrics.widthPixels
     }
 
     override fun onDestroy() {
@@ -188,5 +198,12 @@ open class AbstractLevelActivity : MyActivity(), SurfaceHolder.Callback2 {
         // For example, show modal with results.
 
         finish() // close LevelActivity
+    }
+
+    open fun loadContentView() {
+        // You can define your custom xml layout for settings here
+        setContentView(R.layout.activity_abstract_level)
+
+        // redefine this
     }
 }

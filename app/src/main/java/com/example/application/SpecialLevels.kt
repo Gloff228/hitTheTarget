@@ -15,7 +15,7 @@ class SpecialLevels : MyActivity() {
     }
 
     fun onClickReturnButton(view: View) {
-        startActivity(Intent(this, LevelMenu::class.java))
+        finish()
     }
 
     fun onBubbleButtonButton(view: View) {
