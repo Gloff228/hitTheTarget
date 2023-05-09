@@ -10,7 +10,7 @@ open class FigureCircle(
 
     var diameter = diameter.toDouble()
     var radius = this.diameter / 2
-    var center = Dot(x + radius, y + radius)
+    var center = Dot(x, y)
 
     override fun onClickEvent() {
         if (isActive) {
@@ -21,7 +21,7 @@ open class FigureCircle(
 
     override fun setPosition(x: Number, y: Number) {
         super.setPosition(x, y)
-        center = Dot(this.x + radius, this.y + radius)
+        center = Dot(this.x, this.y)
     }
 
     open fun getDistanceFromCenter(x: Number, y: Number): Double {
@@ -36,10 +36,9 @@ open class FigureCircle(
     }
 
     override fun draw(canvas: Canvas) {
-        // TODO it is bad solution. Need to update for outlines
         var radiusToDraw = radius
         if (!isActive) {
-             radiusToDraw *= 0.5
+             radiusToDraw *= 0.3
         }
         canvas.drawCircle(center.x.toFloat(), center.y.toFloat(), radiusToDraw.toFloat(), paint)
     }

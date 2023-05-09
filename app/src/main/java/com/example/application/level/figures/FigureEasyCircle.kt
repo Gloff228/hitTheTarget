@@ -1,8 +1,8 @@
 package com.example.application.level.figures
 
-class FigureEasyCircle(
+open class FigureEasyCircle(
     diameter: Number,
-    additionalZonePercent: Double = 0.5
+    additionalZonePercent: Double = 0.2
 ):
     FigureCircle(diameter) {
     /** The same FigureCircle,

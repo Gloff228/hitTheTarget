@@ -3,7 +3,9 @@ package com.example.application.level
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
+import com.example.application.level.figures.FigureComCircle
 import com.example.application.level.figures.FigureEasyCircle
+import kotlin.random.Random
 
 class CommonLevelActivity: AbstractLevelActivity() {
     var clickTime: Int = -1
@@ -21,8 +23,13 @@ class CommonLevelActivity: AbstractLevelActivity() {
     private fun createLevel() {
         figures = ArrayDeque(figuresNumber)
         for (i in 1..figuresNumber) {
-            val figure = FigureEasyCircle(figureSize)
+            val figure = FigureComCircle(figureSize)
             figure.bindLevel(this)
+            val padding = (figureSize * 0.3).toInt()
+            figure.setPosition(
+                Random.nextInt(padding, WIDTH - padding),
+                Random.nextInt(padding, HEIGHT - padding)
+            )
             figures.addLast(figure)
         }
         figures.last().setActive()

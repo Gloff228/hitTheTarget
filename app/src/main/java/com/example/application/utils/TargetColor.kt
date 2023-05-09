@@ -8,5 +8,6 @@ enum class TargetColor(val rgb: Long) {
     BLUE(0xFF0000FF),
     PURPLE(0xFF800080),
     YELLOW(0xFFFFFF00),
-    GREEN(0xFF00FF00);
+    GREEN(0xFF00FF00),
+    BLACK(0xFF000000),
 }

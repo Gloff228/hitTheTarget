@@ -26,8 +26,6 @@ open class FigureBase() {
     private var color = globalSettings.targetColor.rgb.toInt()
     init {
         paint.color = color
-        x = Random.nextInt(0, 1500).toDouble()
-        y = Random.nextInt(0, 500).toDouble()
     }
 
     open fun delete() {
