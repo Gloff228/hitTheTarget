@@ -14,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.application.MyActivity
 import com.example.application.R
 import com.example.application.utils.starSettings
+import kotlin.math.roundToInt
 import kotlin.random.Random
 
 class StarLevel : MyActivity() {
@@ -51,8 +52,6 @@ class StarLevel : MyActivity() {
                 endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
                 horizontalBias = randomFloat()
                 verticalBias = randomFloat()
-                println(horizontalBias)
-                println(verticalBias)
             }
         }
     }
@@ -84,20 +83,23 @@ class StarLevel : MyActivity() {
                     animation?.cancel()
                 }
 
-                override fun onAnimationEnd(animation: Animation?) {}
+                override fun onAnimationEnd(animation: Animation?) {
+
+                }
             })
         }
         star.startAnimation(anim)
 
         star.setOnClickListener {
-            if (anim.hasEnded()) {
-                star.visibility = View.GONE
-                currentStar--
-                if (currentStar >= 0) {
-                    createAnimation(stars[currentStar])
-                } else {
-                    finish()
-                }
+            anim.cancel()
+            star.scaleX = 0f // новый масштаб по X
+            star.scaleY = 0f // новый масштаб по Y
+            star.visibility = View.GONE
+            currentStar--
+            if (currentStar >= 0) {
+                createAnimation(stars[currentStar])
+            } else {
+                finish()
             }
         }
     }
@@ -105,16 +107,16 @@ class StarLevel : MyActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createCountSeekBar() {
         val countSeekBar = findViewById<SeekBar>(R.id.seekBar)
-        countSeekBar.min = 3
-        countSeekBar.max = 50
+        countSeekBar.min = 10
+        countSeekBar.max = 30
         countSeekBar.progress = starSettings.maxCount
 
         val countTextView = findViewById<TextView>(R.id.textView1)
-        countTextView.text = "Count\n${countSeekBar.progress}"
+        countTextView.text = "${countSeekBar.progress} звёзд"
 
         countSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                countTextView.text = "Count\n$progress"
+                countTextView.text = "$progress звёзд"
                 starSettings.maxCount = progress
             }
 
@@ -126,17 +128,18 @@ class StarLevel : MyActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createSizeSeekBar() {
         val sizeSeekBar = findViewById<SeekBar>(R.id.seekBar2)
-        sizeSeekBar.min = 5
-        sizeSeekBar.max = 200
+        sizeSeekBar.min = 50
+        sizeSeekBar.max = 150
         sizeSeekBar.progress = starSettings.size
 
         val countTextView = findViewById<TextView>(R.id.textView2)
-        countTextView.text = "Size\n${sizeSeekBar.progress}"
+        countTextView.text = "${sizeSeekBar.progress}"
 
         sizeSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                countTextView.text = "Size\n$progress"
-                starSettings.size = progress
+                val prg = (progress.toDouble() / 10).roundToInt() * 10
+                countTextView.text = "$prg"
+                starSettings.size = prg
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
@@ -148,15 +151,15 @@ class StarLevel : MyActivity() {
     private fun createScaleSeekBar() {
         val scaleSeekBar = findViewById<SeekBar>(R.id.seekBar3)
         scaleSeekBar.min = 2
-        scaleSeekBar.max = 10
+        scaleSeekBar.max = 4
         scaleSeekBar.progress = starSettings.scale.toInt()
 
         val countTextView = findViewById<TextView>(R.id.textView3)
-        countTextView.text = "Scale\n${scaleSeekBar.progress}"
+        countTextView.text = "в ${scaleSeekBar.progress} раза"
 
         scaleSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                countTextView.text = "Scale\n$progress"
+                countTextView.text = "в $progress раза"
                 starSettings.scale = progress.toFloat()
             }
 
@@ -167,18 +170,24 @@ class StarLevel : MyActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createDurationSeekBar() {
-        val sizeSeekBar = findViewById<SeekBar>(R.id.seekBar4)
-        sizeSeekBar.min = 100
-        sizeSeekBar.max = 5000
-        sizeSeekBar.progress = starSettings.duration.toInt()
+        val durationSeekBar = findViewById<SeekBar>(R.id.seekBar4)
+        durationSeekBar.min = 1
+        durationSeekBar.max = 2000
+        durationSeekBar.progress = starSettings.duration.toInt()
 
         val countTextView = findViewById<TextView>(R.id.textView4)
-        countTextView.text = "Duration\n${sizeSeekBar.progress}"
+        countTextView.text =
+            "${Math.round(durationSeekBar.progress.toDouble() / 100).toDouble() / 10} сек"
 
-        sizeSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        durationSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                countTextView.text = "Duration\n$progress"
-                starSettings.duration = progress.toLong()
+                val prg = Math.round(progress.toDouble() / 100).toDouble() / 10
+                countTextView.text = "$prg сек"
+                if (prg == 0.0) {
+                    starSettings.duration = 1
+                } else {
+                    starSettings.duration = (prg * 1000).toLong()
+                }
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}

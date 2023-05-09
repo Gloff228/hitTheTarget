@@ -10,112 +10,263 @@
     android:screenOrientation="landscape">
 
     <ScrollView
-        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
         android:background="@color/white"
-        android:scrollbarAlwaysDrawHorizontalTrack="false"
-        android:scrollbars="none"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="match_parent"
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="percent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        >
 
-        <LinearLayout
+        <GridLayout
+            android:id="@+id/gridLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:orientation="vertical">
+            android:padding="4dp"
+            android:alignmentMode="alignBounds"
+            android:columnCount="2"
+            android:rowOrderPreserved="false"
+            android:useDefaultMargins="true"
+            android:layout_marginTop="10dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="110dp"
-                android:orientation="horizontal">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/setting1_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="0"
+                android:gravity="center"
+                android:layout_gravity="fill"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="12dp"
+                >
+
+                <TextView
+                    android:id="@+id/settingName1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Количество"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </TextView>
 
                 <TextView
                     android:id="@+id/textView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Count\n10"
-                    android:textAlignment="center"
-                    android:textSize="24sp" />
+                    android:layout_marginTop="4sp"
+                    android:text="Setting value"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/settingName1">
+
+                </TextView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/setting1_2"
+                android:gravity="center"
+                android:layout_gravity="fill"
+                android:paddingEnd="80dp"
+                tools:ignore="RtlSymmetry">
 
                 <SeekBar
                     android:id="@+id/seekBar"
-                    android:layout_width="400dp"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_margin="25dp" />
-            </LinearLayout>
+                    android:layout_margin="0dp"
+                    android:background="@color/material_dynamic_neutral95"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/setting2_1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_columnWeight="0"
+                android:gravity="center"
+                android:layout_gravity="fill"
+                >
+
+                <TextView
+                    android:id="@+id/settingName2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Размер"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </TextView>
 
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Size\n60"
-                    android:textAlignment="center"
-                    android:textSize="24sp" />
+                    android:layout_marginTop="4sp"
+                    android:text="Setting value"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/settingName2">
+
+                </TextView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/setting2_2"
+                android:gravity="center"
+                android:layout_gravity="fill"
+                android:paddingEnd="80dp"
+                tools:ignore="RtlSymmetry">
 
                 <SeekBar
                     android:id="@+id/seekBar2"
-                    android:layout_width="400dp"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_margin="25dp" />
-            </LinearLayout>
+                    android:layout_margin="0dp"
+                    android:background="@color/material_dynamic_neutral95"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/setting3_1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_columnWeight="0"
+                android:gravity="center"
+                android:layout_gravity="fill"
+                >
+
+                <TextView
+                    android:id="@+id/settingName3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Увеличение"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </TextView>
 
                 <TextView
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Scaling\n6"
-                    android:textAlignment="center"
-                    android:textSize="24sp" />
+                    android:layout_marginTop="4sp"
+                    android:text="Setting value"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/settingName3">
+
+                </TextView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/setting3_2"
+                android:gravity="center"
+                android:layout_gravity="fill"
+                android:paddingEnd="80dp"
+                tools:ignore="RtlSymmetry">
 
                 <SeekBar
                     android:id="@+id/seekBar3"
-                    android:layout_width="400dp"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_margin="25dp" />
-            </LinearLayout>
+                    android:layout_margin="0dp"
+                    android:background="@color/material_dynamic_neutral95"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/setting4_1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_columnWeight="0"
+                android:gravity="center"
+                android:layout_gravity="fill"
+                >
+
+                <TextView
+                    android:id="@+id/settingName4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Анимация"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </TextView>
 
                 <TextView
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Duration\n1000"
-                    android:textAlignment="center"
-                    android:textSize="24sp" />
+                    android:layout_marginTop="4sp"
+                    android:text="Setting value"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/settingName4">
+
+                </TextView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/setting4_2"
+                android:gravity="center"
+                android:layout_gravity="fill"
+                android:paddingEnd="80dp"
+                tools:ignore="RtlSymmetry">
 
                 <SeekBar
                     android:id="@+id/seekBar4"
-                    android:layout_width="400dp"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_margin="25dp" />
-            </LinearLayout>
+                    android:layout_margin="0dp"
+                    android:background="@color/material_dynamic_neutral95"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/buttonStart"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:layout_columnSpan="2"
+                android:layout_columnWeight="0"
                 android:layout_margin="5dp"
+                android:layout_marginTop="50dp"
                 android:onClick="onClickButtonCreate"
-                android:text="Создать уровень" />
-        </LinearLayout>
+                android:text="Старт"
+                android:textSize="20sp" />
+
+        </GridLayout>
+
     </ScrollView>
 
     <ImageView
