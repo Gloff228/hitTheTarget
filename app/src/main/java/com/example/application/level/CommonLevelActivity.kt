@@ -92,7 +92,7 @@ class CommonLevelActivity: AbstractLevelActivity() {
 
     @SuppressLint("SetTextI18n")
     fun updateDuration() {
-        updateScore()
+        updateScore()  // Я не знаю почему, но без обновленя счёта обновление времени не происходит
         val timeRemain = clickTime - (System.currentTimeMillis() - lastClickAt)
         if (timeRemain <= 0) {
             finishLevel()  // TODO add losing screen
