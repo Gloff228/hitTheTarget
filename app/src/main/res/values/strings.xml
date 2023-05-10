@@ -16,4 +16,5 @@
     <string name="returntostart">returnToStart</string>
     <string name="back">Назад</string>
     <string name="again">Ещё раз</string>
+    <string name="user">User</string>
 </resources>

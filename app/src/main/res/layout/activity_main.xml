@@ -10,8 +10,23 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:screenOrientation="landscape"
-        android:background="@drawable/background">
+        android:background="@drawable/background"
+        android:screenOrientation="landscape">
+
+        <ImageView
+            android:id="@+id/imageViewUser"
+            android:layout_width="66dp"
+            android:layout_height="53dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:contentDescription="@string/user"
+            android:focusable="true"
+            android:onClick="onClickButtonUser"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/user" />
+
         <ImageView
             android:id="@+id/imageViewSettings"
             android:layout_width="66dp"
@@ -30,23 +45,36 @@
             android:id="@+id/imageViewStart"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/start"
-            app:layout_constraintDimensionRatio="H,1:1"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintVertical_weight="1"
-            app:layout_constraintWidth_percent="0.25"
-            app:layout_constraintHeight_percent="0.25"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:clickable="true"
             android:contentDescription="Start"
             android:focusable="true"
             android:onClick="onClickButtonStart"
+            android:scaleType="fitXY"
+            android:src="@drawable/start"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="H,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.25"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintVertical_bias="0.7" />
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.7"
+            app:layout_constraintVertical_weight="1"
+            app:layout_constraintWidth_percent="0.25" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="UserName"
+            android:textColor="#373737"
+            android:textSize="28sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewUser" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

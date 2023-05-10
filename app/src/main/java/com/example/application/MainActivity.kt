@@ -28,4 +28,6 @@ class MainActivity : MyActivity() {
     fun onClickButtonSettings(view: View) {
         startActivity(Intent(this, SettingsScreen::class.java))
     }
+
+    fun onClickButtonUser(view: View) {}
 }
