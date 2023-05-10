@@ -31,6 +31,10 @@ class StarLevel : MyActivity() {
         R.drawable.star_purpule
     )
 
+    init {
+        NEED_HANDLE_DARK_MODE = false
+    }
+
     private fun randomFloat(): Float {
         var randomFloat = Random.nextFloat()
         if (randomFloat < 0.07f) randomFloat = 0.07f

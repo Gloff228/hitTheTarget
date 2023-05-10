@@ -53,7 +53,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:backgroundTint="@color/gray"
-                android:onClick="selectGray"
+                android:onClick="selectBlack"
                 android:textSize="20sp" />
 
             <Button

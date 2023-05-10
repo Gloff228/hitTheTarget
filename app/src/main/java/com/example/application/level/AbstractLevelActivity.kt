@@ -58,20 +58,8 @@ open class AbstractLevelActivity : MyActivity(), SurfaceHolder.Callback2 {
         }
     }
 
-    private fun calculateNewFrame(startTime: Long) {
-        /** Make calculations before drawing new frame (for example, if we need to move figure) */
-        for (figure in figures.reversed()) {
-            figure.calculateNewFrame(startTime)
-            if (figure.needRedraw) {
-                needRedraw = true
-                figure.needRedraw = false
-            }
-        }
-    }
-
     @RequiresApi(Build.VERSION_CODES.O)
     private fun drawNewFrame() {
-        println("Redraw")  // TODO debug
         val canvas = surface.holder.lockCanvas()
         if (canvas != null) {
             setBackgroundColor(canvas)
@@ -159,6 +147,8 @@ open class AbstractLevelActivity : MyActivity(), SurfaceHolder.Callback2 {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+
+        onLevelStart()
     }
 
     override fun surfaceChanged(p0: SurfaceHolder, p1: Int, p2: Int, p3: Int) {
@@ -173,7 +163,7 @@ open class AbstractLevelActivity : MyActivity(), SurfaceHolder.Callback2 {
         // pass
     }
 
-    fun setNewActiveFigure() {
+    open fun setNewActiveFigure() {
         /** When player passed last active figure (clicked on it),
          *  and we need to get new active figure (and to delete last active figure)
          *  */
@@ -205,5 +195,22 @@ open class AbstractLevelActivity : MyActivity(), SurfaceHolder.Callback2 {
         setContentView(R.layout.activity_abstract_level)
 
         // redefine this
+    }
+
+    open fun calculateNewFrame(startTime: Long) {
+        /** Make calculations before drawing new frame (for example, if we need to move figure) */
+        for (figure in figures.reversed()) {
+            figure.calculateNewFrame(startTime)
+            if (figure.needRedraw) {
+                needRedraw = true
+                figure.needRedraw = false
+            }
+        }
+    }
+
+    open fun onLevelStart() {
+        /** Called when the first frame started to be drawn */
+
+        // define this
     }
 }

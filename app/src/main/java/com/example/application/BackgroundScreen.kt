@@ -1,10 +1,10 @@
 package com.example.application
 
-import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import com.example.application.utils.BackgroundColor
-import com.example.application.utils.globalSettings
 
 class BackgroundScreen : MyActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,28 +12,43 @@ class BackgroundScreen : MyActivity() {
         setContentView(R.layout.activity_background_screen)
     }
 
-    fun selectWhite(view: View) {
-        setBackgroundColor(BackgroundColor.WHITE)
+    private fun handleColorChange() {
+        if (settings.backgroundColor.isDark()) {
+            handleDarkMode()
+        } else {
+            val root = findViewById<ViewGroup>(android.R.id.content).rootView as ViewGroup
+            setTextColorForAll(root, Color.BLACK)  // change textColor to white
+        }
     }
 
-    fun selectGray(view: View) {
-        setBackgroundColor(BackgroundColor.GRAY)
+    fun selectWhite(view: View) {
+        setBackgroundColor(BackgroundColor.WHITE)
+        handleColorChange()
+    }
+
+    fun selectBlack(view: View) {
+        setBackgroundColor(BackgroundColor.BLACK)
+        handleColorChange()
     }
 
     fun selectPink(view: View) {
         setBackgroundColor(BackgroundColor.PINK)
+        handleColorChange()
     }
 
     fun selectRed(view: View) {
         setBackgroundColor(BackgroundColor.RED)
+        handleColorChange()
     }
 
     fun selectBlue(view: View) {
         setBackgroundColor(BackgroundColor.BLUE)
+        handleColorChange()
     }
 
     fun selectPurple(view: View) {
         setBackgroundColor(BackgroundColor.PURPLE)
+        handleColorChange()
     }
 
     fun onClickButtonSettingsBack(view: View) {

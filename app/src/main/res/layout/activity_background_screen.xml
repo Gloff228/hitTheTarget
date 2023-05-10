@@ -50,9 +50,9 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
+                android:backgroundTint="@color/black"
                 android:gravity="center"
-                android:backgroundTint="@color/background_gray"
-                android:onClick="selectGray"
+                android:onClick="selectBlack"
                 android:textSize="20sp" />
 
             <Button

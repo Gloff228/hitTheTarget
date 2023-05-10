@@ -15,7 +15,6 @@ open class FigureCircle(
     override fun onClickEvent() {
         if (isActive) {
             this.delete()
-            println("Deleted")
         }
     }
 
