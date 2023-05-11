@@ -58,8 +58,8 @@ class VegetablesLevel : AbstractLevelActivity() {
     private fun isPointInsideFirstGarden(point: Dot): Boolean {
         val d1 = Dot(0, 0.8 * HEIGHT)
         val d2 = Dot(0.2 * WIDTH, 0.8 * HEIGHT)
-        val d3 = Dot(0.34 * WIDTH, 0.4 * HEIGHT)
-        val d4 = Dot(0.14 * WIDTH, 0.4 * HEIGHT)
+        val d3 = Dot(0.35 * WIDTH, 0.4 * HEIGHT)
+        val d4 = Dot(0.15 * WIDTH, 0.4 * HEIGHT)
         return isPointInsideTrapezoid(d1, d2, d3, d4, point)
     }
 
@@ -74,7 +74,7 @@ class VegetablesLevel : AbstractLevelActivity() {
     private fun isPointInsideThirdGarden(point: Dot): Boolean {
         val d1 = Dot(0.80 * WIDTH, 0.8 * HEIGHT)
         val d2 = Dot(WIDTH, 0.8 * HEIGHT)
-        val d3 = Dot(0.86 * WIDTH, 0.4 * HEIGHT)
+        val d3 = Dot(0.85 * WIDTH, 0.4 * HEIGHT)
         val d4 = Dot(0.65 * WIDTH, 0.4 * HEIGHT)
         return isPointInsideTrapezoid(d1, d2, d3, d4, point)
     }
