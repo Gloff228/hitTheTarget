@@ -1,5 +1,6 @@
 package com.example.application.level
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
@@ -8,10 +9,12 @@ import android.graphics.PixelFormat
 import android.graphics.PorterDuff
 import android.os.Build
 import android.os.Bundle
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import com.example.application.R
 import com.example.application.level.figures.FigureVegetable
 import com.example.application.level.utils.Dot
+import com.example.application.utils.globalSettings
 import kotlin.random.Random
 
 
@@ -23,21 +26,27 @@ class VegetablesLevel : AbstractLevelActivity() {
 
     var lastClickAt: Long = 0
 
+    lateinit var scoreView: TextView
+    lateinit var durationView: TextView
+
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         loadContentView()
         getSettings()
+        handleInfoViews()
 
         surface = findViewById(R.id.surface)
         surface.holder.addCallback(this)
         surface.setZOrderOnTop(true)
         surface.holder.setFormat(PixelFormat.TRANSPARENT)
+
         createLevel()
     }
 
-    fun isPointInsideTrapezoid(d1: Dot, d2: Dot, d3: Dot, d4: Dot, point: Dot): Boolean {
+    private fun isPointInsideTrapezoid(d1: Dot, d2: Dot, d3: Dot, d4: Dot, point: Dot): Boolean {
         val b1 = (point.y - d1.y) * (d2.x - d1.x) > (point.x - d1.x) * (d2.y - d1.y)
         val b2 = (point.y - d2.y) * (d3.x - d2.x) > (point.x - d2.x) * (d3.y - d2.y)
         val b3 = (point.y - d3.y) * (d4.x - d3.x) > (point.x - d3.x) * (d4.y - d3.y)
@@ -46,7 +55,7 @@ class VegetablesLevel : AbstractLevelActivity() {
         return (b1 == b2) && (b2 == b3) && (b3 == b4)
     }
 
-    fun isPointInsideFirstGarden(point: Dot): Boolean {
+    private fun isPointInsideFirstGarden(point: Dot): Boolean {
         val d1 = Dot(0, 0.8 * HEIGHT)
         val d2 = Dot(0.2 * WIDTH, 0.8 * HEIGHT)
         val d3 = Dot(0.34 * WIDTH, 0.4 * HEIGHT)
@@ -54,7 +63,7 @@ class VegetablesLevel : AbstractLevelActivity() {
         return isPointInsideTrapezoid(d1, d2, d3, d4, point)
     }
 
-    fun isPointInsideSecondGarden(point: Dot): Boolean {
+    private fun isPointInsideSecondGarden(point: Dot): Boolean {
         val d1 = Dot(0.4 * WIDTH, 0.8 * HEIGHT)
         val d2 = Dot(0.65 * WIDTH, 0.8 * HEIGHT)
         val d3 = Dot(0.60 * WIDTH, 0.4 * HEIGHT)
@@ -62,7 +71,7 @@ class VegetablesLevel : AbstractLevelActivity() {
         return isPointInsideTrapezoid(d1, d2, d3, d4, point)
     }
 
-    fun isPointInsideThirdGarden(point: Dot): Boolean {
+    private fun isPointInsideThirdGarden(point: Dot): Boolean {
         val d1 = Dot(0.80 * WIDTH, 0.8 * HEIGHT)
         val d2 = Dot(WIDTH, 0.8 * HEIGHT)
         val d3 = Dot(0.86 * WIDTH, 0.4 * HEIGHT)
@@ -70,7 +79,11 @@ class VegetablesLevel : AbstractLevelActivity() {
         return isPointInsideTrapezoid(d1, d2, d3, d4, point)
     }
 
-    fun generateRandomPoint(leftBorder: Int, rightBorder: Int, isPointInside: (input: Dot) -> Boolean ): Dot {
+    private fun generateRandomPoint(
+        leftBorder: Int,
+        rightBorder: Int,
+        isPointInside: (input: Dot) -> Boolean
+    ): Dot {
         val topBorder = (HEIGHT * 0.2).toInt()
         val bottomBorder = (HEIGHT * 0.8).toInt()
 
@@ -79,39 +92,38 @@ class VegetablesLevel : AbstractLevelActivity() {
         var point = Dot(x, y)
 
         while (!isPointInside(point)) {
-            println(isPointInside)
             x = Random.nextInt(leftBorder, rightBorder)
             y = Random.nextInt(topBorder, bottomBorder)
             point = Dot(x, y)
         }
 
-        return point;
+        return point
     }
 
-    fun generateRandomPointFirstGarden(): Dot {
+    private fun generateRandomPointFirstGarden(): Dot {
         val leftBorder = (WIDTH * -0.1).toInt()
         val rightBorder = (WIDTH * 0.4).toInt()
         return generateRandomPoint(leftBorder, rightBorder, ::isPointInsideFirstGarden)
     }
 
-    fun generateRandomPointSecondGarden(): Dot {
+    private fun generateRandomPointSecondGarden(): Dot {
         val leftBorder = (WIDTH * 0.2).toInt()
         val rightBorder = (WIDTH * 0.7).toInt()
         return generateRandomPoint(leftBorder, rightBorder, ::isPointInsideSecondGarden)
     }
 
-    fun generateRandomPointThirdGarden(): Dot {
+    private fun generateRandomPointThirdGarden(): Dot {
         val leftBorder = (WIDTH * 0.5).toInt()
         val rightBorder = (WIDTH * 1.1).toInt()
         return generateRandomPoint(leftBorder, rightBorder, ::isPointInsideThirdGarden)
     }
 
-    fun generateRandomPosition(index: Int): Dot {
+    private fun generateRandomPosition(index: Int): Dot {
         var point = Dot(0, 0)
         when (index) {
-            1 -> point =  generateRandomPointFirstGarden()
-            2 -> point =  generateRandomPointSecondGarden()
-            0 -> point =  generateRandomPointThirdGarden()
+            1 -> point = generateRandomPointFirstGarden()
+            2 -> point = generateRandomPointSecondGarden()
+            0 -> point = generateRandomPointThirdGarden()
         }
         return point
     }
@@ -135,7 +147,7 @@ class VegetablesLevel : AbstractLevelActivity() {
 
             val position = generateRandomPosition(i % 3)
             val figure = FigureVegetable(vegetable, sprout)
-            figure.setPosition(position.x - figureSize / 2, position.y- figureSize / 2)
+            figure.setPosition(position.x - figureSize / 2, position.y - figureSize / 2)
             figure.bindLevel(this)
 
             figures.addLast(figure)
@@ -157,9 +169,44 @@ class VegetablesLevel : AbstractLevelActivity() {
         setContentView(R.layout.activity_vegetables_level)
     }
 
+    private fun handleInfoViews() {
+        scoreView = findViewById(R.id.score)
+        durationView = findViewById(R.id.duration)
+    }
+
+    override fun onLevelStart() {
+        lastClickAt = System.currentTimeMillis()
+    }
+
+    override fun calculateNewFrame(startTime: Long) {
+        super.calculateNewFrame(startTime)
+
+        updateDuration()
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun updateScore() {
+        scoreView.text = "${figures.size}/${figuresNumber}"
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun updateDuration() {
+        updateScore()  // Я не знаю почему, но без обновленя счёта обновление времени не происходит
+        val timeRemain = clickTime - (System.currentTimeMillis() - lastClickAt)
+        if (timeRemain <= 0) {
+            finishLevel()  // TODO add losing screen
+            return
+        }
+        val newText = "${timeRemain / 1000}.${timeRemain % 1000 / 100} сек "
+//        durationView.text = newText
+        if (durationView.text.toString() != newText) {
+            durationView.text = newText
+        }
+    }
+
     override fun setNewActiveFigure() {
         figures.removeLast()
-        //updateScore()
+        updateScore()
         lastClickAt = System.currentTimeMillis()
         if (figures.isNotEmpty()) {
             figures.shuffle()
