@@ -50,8 +50,8 @@ class FigureVegetable(
 
 
     override fun draw(canvas: Canvas) {
-        val sproutX = (x + vegetableImg.width / 2).toFloat()
-        val sproutY = (y + vegetableImg.height / 2).toFloat()
+        val sproutX = (x + vegetableImg.width / 3).toFloat()
+        val sproutY = (y + vegetableImg.height / 3).toFloat()
         if (!isActive)
             canvas.drawBitmap(sproutImg, sproutX , sproutY, paint)
         else
