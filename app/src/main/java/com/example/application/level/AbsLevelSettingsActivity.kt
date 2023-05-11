@@ -155,6 +155,4 @@ open class AbsLevelSettingsActivity: MyActivity() {
     }
 
     // also define SETTINGS
-
-
 }

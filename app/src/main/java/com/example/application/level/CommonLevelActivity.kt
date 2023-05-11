@@ -1,6 +1,7 @@
 package com.example.application.level
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -12,6 +13,11 @@ import com.example.application.utils.globalSettings
 import kotlin.random.Random
 
 class CommonLevelActivity: AbstractLevelActivity() {
+
+    companion object {
+        const val PARAM_IS_WIN = "PARAM_IS_WIN"
+    }
+
     var clickTime: Int = -1
     var figuresNumber: Int = -1
     var figureSize: Int = -1
@@ -20,6 +26,8 @@ class CommonLevelActivity: AbstractLevelActivity() {
 
     lateinit var scoreView: TextView
     lateinit var durationView: TextView
+
+    var isWin = false
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,13 +89,23 @@ class CommonLevelActivity: AbstractLevelActivity() {
     }
 
     override fun finishLevel() {
-        // TODO show finish modal (with replay level button or exit)
+        threadQuit = true
+        openResultScreen()
         finish()
+    }
+
+    private fun openResultScreen() {
+        val intent = Intent(this, CommonLevelResultActivity::class.java)
+        intent.putExtra(CommonLevelSettingsActivity.PARAM_FIGURES_NUMBER, figuresNumber)
+        intent.putExtra(CommonLevelSettingsActivity.PARAM_FIGURE_SIZE, figureSize)
+        intent.putExtra(CommonLevelSettingsActivity.PARAM_CLICK_TIME, clickTime)
+        intent.putExtra(PARAM_IS_WIN, isWin)
+        startActivity(intent)
     }
 
     @SuppressLint("SetTextI18n")
     fun updateScore() {
-        scoreView.text = "${figures.size}/${figuresNumber}"
+        scoreView.text = "${figuresNumber - figures.size}/${figuresNumber}"
     }
 
     @SuppressLint("SetTextI18n")
@@ -95,7 +113,8 @@ class CommonLevelActivity: AbstractLevelActivity() {
         updateScore()  // Я не знаю почему, но без обновленя счёта обновление времени не происходит
         val timeRemain = clickTime - (System.currentTimeMillis() - lastClickAt)
         if (timeRemain <= 0) {
-            finishLevel()  // TODO add losing screen
+            isWin = false
+            finishLevel()
             return
         }
         val newText = "${timeRemain / 1000}.${timeRemain % 1000 / 100} сек "
@@ -117,7 +136,8 @@ class CommonLevelActivity: AbstractLevelActivity() {
             figures.last().setActive()
             needRedraw = true
         } else {
-            finishLevel()  // TODO add winning screen
+            isWin = true
+            finishLevel()
         }
     }
 }

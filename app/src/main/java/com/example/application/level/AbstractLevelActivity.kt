@@ -73,7 +73,7 @@ open class AbstractLevelActivity : MyActivity(), SurfaceHolder.Callback2 {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun handleNewFrame(startTime: Long) {
-        calculateNewFrame(startTime)
+        calculateNewFrame(startTime)  //
         onHandlingNewFrame()
         if (needRedraw) {
             drawNewFrame()
@@ -187,6 +187,7 @@ open class AbstractLevelActivity : MyActivity(), SurfaceHolder.Callback2 {
         // redefine this
         // For example, show modal with results.
 
+        threadQuit = true
         finish() // close LevelActivity
     }
 
