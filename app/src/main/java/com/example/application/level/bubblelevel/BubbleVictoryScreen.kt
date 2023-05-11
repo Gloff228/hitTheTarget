@@ -19,9 +19,10 @@ class BubbleVictoryScreen: MyActivity() {
 
     fun onRestartButtonClick(view: View) {
         startActivity(Intent(this, BubbleLevel::class.java))
+        finish()
     }
 
     fun onExitButtonClick(view: View) {
-        startActivity(Intent(this, SpecialLevels::class.java))
+        finish()
     }
 }
