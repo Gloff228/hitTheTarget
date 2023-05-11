@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.example.application.level.bubblelevel.BubbleLevel
 import com.example.application.level.StarLevel
+import com.example.application.level.VegetableLevelSettingsActivity
 import com.example.application.level.VegetablesLevel
 import com.example.application.level.bubblelevel.BubbleSettings
 
@@ -26,6 +27,6 @@ class SpecialLevels : MyActivity() {
         startActivity(Intent(this, StarLevel::class.java))
     }
     fun onVegetablesButtonClick(view: View) {
-        startActivity(Intent(this, VegetablesLevel::class.java))
+        startActivity(Intent(this, VegetableLevelSettingsActivity::class.java))
     }
 }

@@ -10,10 +10,9 @@
     tools:context=".level.VegetablesLevel">
 
     <SurfaceView
-        android:id="@+id/vegetableSurface"
+        android:id="@+id/surface"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"></SurfaceView>
+        android:layout_height="match_parent">
+    </SurfaceView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
