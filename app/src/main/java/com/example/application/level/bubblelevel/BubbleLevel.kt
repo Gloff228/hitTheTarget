@@ -29,7 +29,9 @@ class BubbleLevel: AbstractLevelActivity() {
         setCounter()
         surface = findViewById(R.id.bubSurface)
         surface.holder.addCallback(this)
-        surface.holder.setFormat(PixelFormat.RGBA_8888)
+        surface.setZOrderOnTop(true)
+        surface.holder.setFormat(PixelFormat.TRANSPARENT)
+
     }
 
     override fun onResume() {
@@ -70,7 +72,7 @@ class BubbleLevel: AbstractLevelActivity() {
         currentBubble = bubbleList[0]
 
         if (canvas != null) {
-            canvas.drawColor(Color.rgb(217, 170, 252))
+            canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
             currentBubble.move()
 
             if (currentBubble.y < -currentBubble.getBubbleHeight()) {
@@ -132,6 +134,6 @@ class BubbleLevel: AbstractLevelActivity() {
     }
 
     fun onClickReturnButton(view: View) {
-        startActivity(Intent(this, BubbleSettings::class.java))
+        finish()
     }
 }

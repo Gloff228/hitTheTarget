@@ -6,30 +6,20 @@ import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
 import com.example.application.R
+import com.example.application.level.utils.Dot
 
 
 class FigureVegetable(
     private var vegetableImg: Bitmap,
-    private var sproutImg: Bitmap
+    private var sproutImg: Bitmap,
 ) : FigureBase() {
 
-    //val sproutImg = BitmapFactory.decodeResource(Resources.getSystem(), R.drawable.sprout)
-
-    companion object {
-        const val DEFAULT_IMAGE_SIDE = 350.0 // TODO get from settings
-    }
-
-    fun getDefaultSide(): Double {
-        return DEFAULT_IMAGE_SIDE
-    }
 
     override fun onClickEvent() {
         if (isActive) {
             this.delete()
         }
     }
-
-    // TODO create method for spawn vegetables in specific places
 
     override fun isPointInsideFigure(x: Number, y: Number): Boolean {
         val bitmap = this.vegetableImg
@@ -60,9 +50,10 @@ class FigureVegetable(
 
 
     override fun draw(canvas: Canvas) {
-
+        val sproutX = (x + vegetableImg.width / 2).toFloat()
+        val sproutY = (y + vegetableImg.height / 2).toFloat()
         if (!isActive)
-            canvas.drawBitmap(sproutImg, x.toFloat(), y.toFloat(), paint)
+            canvas.drawBitmap(sproutImg, sproutX , sproutY, paint)
         else
             canvas.drawBitmap(vegetableImg, x.toFloat(), y.toFloat(), paint)
     }

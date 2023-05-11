@@ -88,6 +88,6 @@ class BubbleSettings: MyActivity() {
     }
 
     fun onClickReturnButton(view: View) {
-        startActivity(Intent(this, SpecialLevels::class.java))
+        finish()
     }
 }

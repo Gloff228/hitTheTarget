@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layout"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:screenOrientation="landscape"
-    >
+    android:background="@drawable/background_bubble_level"
+    android:screenOrientation="landscape">
 
     <SurfaceView
         android:id="@+id/bubSurface"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
 
     <RelativeLayout
@@ -22,34 +22,34 @@
             android:id="@+id/counterOfBubble"
             android:layout_width="150dp"
             android:layout_height="100dp"
-            app:srcCompat="@drawable/counter"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            app:srcCompat="@drawable/counter" />
 
         <TextView
             android:id="@+id/counterText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/counterOfBubble"
+            android:layout_alignTop="@+id/counterOfBubble"
+            android:layout_alignEnd="@+id/counterOfBubble"
+            android:layout_alignBottom="@+id/counterOfBubble"
+            android:gravity="center"
             android:padding="15dp"
             android:textColor="@android:color/black"
-            android:textSize="40sp"
-            android:gravity="center"
-            android:layout_alignTop="@+id/counterOfBubble"
-            android:layout_alignBottom="@+id/counterOfBubble"
-            android:layout_alignStart="@+id/counterOfBubble"
-            android:layout_alignEnd="@+id/counterOfBubble" />
+            android:textSize="40sp" />
 
         <ImageView
             android:id="@+id/returnButton"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            app:srcCompat="@android:drawable/ic_menu_revert"
-            android:clickable="true"
-            android:onClick="onClickReturnButton"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
-            android:focusable="true" />
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onClickReturnButton"
+            app:srcCompat="@android:drawable/ic_menu_revert" />
     </RelativeLayout>
 
 

@@ -37,6 +37,10 @@
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
+            android:name=".level.VegetableLevelSettingsActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".TargetColorScreen"
             android:exported="false"
             android:screenOrientation="landscape" />
