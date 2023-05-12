@@ -36,6 +36,8 @@ class BubbleLevel: AbstractLevelActivity() {
         surface.holder.addCallback(this)
         surface.setZOrderOnTop(true)
         surface.holder.setFormat(PixelFormat.TRANSPARENT)
+
+        if (bubbleCounter == figuresNumber) finishLevel()
     }
 
     private fun createImage() {
@@ -70,7 +72,6 @@ class BubbleLevel: AbstractLevelActivity() {
 
     private fun drawNewFrame(holder: SurfaceHolder) {
         val canvas = holder.lockCanvas()
-
         currentBubble = bubbleList[0]
 
         if (canvas != null) {
@@ -130,10 +131,9 @@ class BubbleLevel: AbstractLevelActivity() {
     private fun updateCounter() {
         val textOfCounter = findViewById<TextView>(R.id.counterText)
 
-        if (bubbleCounter < figuresNumber - 1) {
-            bubbleCounter++
-            textOfCounter.text = "${bubbleCounter}/${figuresNumber}"
-        } else finishLevel()
+        bubbleCounter++
+        textOfCounter.text = "${bubbleCounter}/${figuresNumber}"
+        if (bubbleCounter == figuresNumber) finishLevel()
     }
 
     override fun finishLevel() {
