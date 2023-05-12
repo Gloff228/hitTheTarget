@@ -19,7 +19,6 @@ import java.io.BufferedReader
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.InputStreamReader
-import java.security.Key
 
 
 open class AbsLevelSettingsActivity: MyActivity() {
@@ -78,31 +77,6 @@ open class AbsLevelSettingsActivity: MyActivity() {
             } else {
                 resultSettings[setting.name] = setting.startValue
             }
-        }
-    }
-
-    fun readFromFile(filename: String): String {
-        var fileContents = ""
-        try {
-            val inputStream: FileInputStream = openFileInput(filename)
-            val inputStreamReader = InputStreamReader(inputStream)
-            val bufferedReader = BufferedReader(inputStreamReader)
-            fileContents = bufferedReader.readText()
-            inputStream.close()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return fileContents
-    }
-
-    fun writeToFile(filename: String, content: String) {
-        // Warning! This function overrides all content in file
-        try {
-            val outputStream: FileOutputStream = openFileOutput(filename, Context.MODE_PRIVATE)
-            outputStream.write(content.toByteArray())
-            outputStream.close()
-        } catch (e: Exception) {
-            e.printStackTrace()
         }
     }
 
@@ -193,15 +167,6 @@ open class AbsLevelSettingsActivity: MyActivity() {
         }
         // TODO save settings to storage
         startActivity(levelIntent)
-    }
-
-    protected fun toJson(map: Map<String, Any>): String {
-        return Gson().toJson(map)
-    }
-
-    protected fun fromJson(jsonString: String): Map<String, Any> {
-        println(jsonString)
-        return Gson().fromJson(jsonString, Map::class.java) as Map<String, Any>
     }
 
     /** Ниже функции, которые можно переопределять */

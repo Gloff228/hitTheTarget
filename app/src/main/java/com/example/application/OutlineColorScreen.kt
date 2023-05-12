@@ -10,6 +10,12 @@ class OutlineColorScreen : MyActivity() {
         setContentView(R.layout.activity_outline_color_screen)
     }
 
+    override fun onStop() {
+        super.onStop()
+
+        saveGlobalSettings()
+    }
+
     fun selectWhite(view: View) {
         setOutlineColor(TargetColor.WHITE)
     }
