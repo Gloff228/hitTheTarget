@@ -3,7 +3,7 @@ package com.example.application.level.figures
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import com.example.application.level.bubblelevel.coefficientForSpeed
+import com.example.application.level.coinlevel.coefficientForSpeed
 
 class FigureCoin(img: Bitmap): FigureBase() {
     private var coinSpeed = 5 + coefficientForSpeed
