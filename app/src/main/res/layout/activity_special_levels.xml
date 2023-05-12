@@ -24,6 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:paddingBottom="20dp"
             android:orientation="vertical">
 
             <Button
@@ -45,7 +46,7 @@
             <Button
                 android:id="@+id/button3"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="100dp"
                 android:onClick="onCoinButtonButton"
                 android:text="Дождь из монет" />
 
