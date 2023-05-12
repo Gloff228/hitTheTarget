@@ -10,6 +10,9 @@ enum class BackgroundColor(val rgb: Long) {
     PINK(0xFFFD65F7),
     RED(0xFFFD6868),
     BLUE(0xFF5975FF),
+    YELLOW(0xFFFFFF99),
+    GREEN(0xFFB2FF66),
+    AQUA(0xFF99FFFF),
     PURPLE(0xFFC495FF);
 
     fun isDark(): Boolean {

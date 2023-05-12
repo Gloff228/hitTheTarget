@@ -10,4 +10,5 @@ enum class TargetColor(val rgb: Long) {
     YELLOW(0xFFFFFF00),
     GREEN(0xFF00FF00),
     BLACK(0xFF000000),
+    DARKGREEN(0xFF009900),
 }

@@ -14,8 +14,8 @@ class OutlineColorScreen : MyActivity() {
         setOutlineColor(TargetColor.WHITE)
     }
 
-    fun selectGray(view: View) {
-        setOutlineColor(TargetColor.GRAY)
+    fun selectBlack(view: View) {
+        setOutlineColor(TargetColor.BLACK)
     }
 
     fun selectPink(view: View) {
@@ -41,7 +41,9 @@ class OutlineColorScreen : MyActivity() {
     fun selectGreen(view: View) {
         setOutlineColor(TargetColor.GREEN)
     }
-
+    fun selectDarkGreen(view: View) {
+        setOutlineColor(TargetColor.DARKGREEN)
+    }
     fun onClickButtonSettingsBack(view: View) {
         finish()
     }
