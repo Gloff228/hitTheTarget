@@ -9,12 +9,12 @@
 
     <color name="background_white">#FFFFFF</color>
     <color name="background_gray">#676767</color>
-    <color name="background_pink">#FD65F7</color>
+    <color name="background_pink">#FD96F9</color>
     <color name="background_red">#FD6868</color>
-    <color name="background_blue">#5975FF</color>
+    <color name="background_blue">#859AFF</color>
     <color name="background_purple">#C495FF</color>
     <color name="background_yellow">#FFFF99</color>
-    <color name="background_green">#B2FF66</color>
+    <color name="background_green">#CFFDA1</color>
     <color name="background_aqua">#99FFFF</color>
 
     <color name="white">#FFFFFF</color>
