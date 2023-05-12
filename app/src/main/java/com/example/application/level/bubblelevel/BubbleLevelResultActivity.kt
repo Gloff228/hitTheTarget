@@ -4,19 +4,22 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import com.example.application.MyActivity
 import com.example.application.R
+import com.example.application.level.VegetableLevelSettingsActivity
+import com.example.application.level.VegetablesLevel
 
-class BubbleVictoryScreen: MyActivity() {
+class BubbleLevelResultActivity: MyActivity() {
 
     var figuresNumber = -1
     var figureSize = -1
     var figureSpeed = -1
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_bubblelevel_victoryscreen)
+        setContentView(R.layout.activity_common_level_win)
 
+        applySettings()
         getSettings()
     }
 
@@ -25,7 +28,17 @@ class BubbleVictoryScreen: MyActivity() {
         figureSize = intent.getIntExtra(BubbleSettings.PARAM_FIGURE_SIZE, -1)
         figureSpeed = intent.getIntExtra(BubbleSettings.PARAM_SPEED, -1)
     }
-    fun onRestartButtonClick(view: View) {
+
+    @SuppressLint("SetTextI18n")
+    private fun applySettings() {
+        val resultTextView = findViewById<TextView>(R.id.resultText)
+        val descriptionView = findViewById<TextView>(R.id.description)
+
+        resultTextView.text = "Молодец!"
+        descriptionView.text = "Ты лопнул все пузырики \n Давай попробуем еще раз?"
+    }
+
+    fun onClickButtonRetry(view: View) {
         val intent = Intent(this, BubbleLevel::class.java)
         intent.putExtra(BubbleSettings.PARAM_FIGURES_NUMBER, figuresNumber)
         intent.putExtra(BubbleSettings.PARAM_FIGURE_SIZE, figureSize)
@@ -34,7 +47,7 @@ class BubbleVictoryScreen: MyActivity() {
         finish()
     }
 
-    fun onExitButtonClick(view: View) {
+    fun onClickButtonBack(view: View) {
         finish()
     }
 }
