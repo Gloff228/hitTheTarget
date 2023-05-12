@@ -1,6 +1,7 @@
 package com.example.application.level
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
@@ -14,21 +15,19 @@ import androidx.annotation.RequiresApi
 import com.example.application.R
 import com.example.application.level.figures.FigureVegetable
 import com.example.application.level.utils.Dot
-import com.example.application.utils.globalSettings
 import kotlin.random.Random
 
 
 class VegetablesLevel : AbstractLevelActivity() {
 
-    var clickTime: Int = -1
     var figuresNumber: Int = -1
     var figureSize: Int = -1
 
-    var lastClickAt: Long = 0
-
     lateinit var scoreView: TextView
-    lateinit var durationView: TextView
 
+    init {
+        FPS = 30
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -152,13 +151,13 @@ class VegetablesLevel : AbstractLevelActivity() {
 
             figures.addLast(figure)
         }
+        updateScore()
         figures.last().setActive()
     }
 
     private fun getSettings() {
         figuresNumber = intent.getIntExtra(CommonLevelSettingsActivity.PARAM_FIGURES_NUMBER, -1)
         figureSize = intent.getIntExtra(CommonLevelSettingsActivity.PARAM_FIGURE_SIZE, -1)
-        clickTime = intent.getIntExtra(CommonLevelSettingsActivity.PARAM_CLICK_TIME, -1) * 100
     }
 
     override fun setBackgroundColor(canvas: Canvas) {
@@ -171,17 +170,6 @@ class VegetablesLevel : AbstractLevelActivity() {
 
     private fun handleInfoViews() {
         scoreView = findViewById(R.id.score)
-        durationView = findViewById(R.id.duration)
-    }
-
-    override fun onLevelStart() {
-        lastClickAt = System.currentTimeMillis()
-    }
-
-    override fun calculateNewFrame(startTime: Long) {
-        super.calculateNewFrame(startTime)
-
-        updateDuration()
     }
 
     @SuppressLint("SetTextI18n")
@@ -189,25 +177,9 @@ class VegetablesLevel : AbstractLevelActivity() {
         scoreView.text = "${figures.size}/${figuresNumber}"
     }
 
-    @SuppressLint("SetTextI18n")
-    fun updateDuration() {
-        updateScore()  // Я не знаю почему, но без обновленя счёта обновление времени не происходит
-        val timeRemain = clickTime - (System.currentTimeMillis() - lastClickAt)
-        if (timeRemain <= 0) {
-            finishLevel()  // TODO add losing screen
-            return
-        }
-        val newText = "${timeRemain / 1000}.${timeRemain % 1000 / 100} сек "
-//        durationView.text = newText
-        if (durationView.text.toString() != newText) {
-            durationView.text = newText
-        }
-    }
-
     override fun setNewActiveFigure() {
         figures.removeLast()
         updateScore()
-        lastClickAt = System.currentTimeMillis()
         if (figures.isNotEmpty()) {
             figures.shuffle()
             figures.last().setActive()
@@ -217,8 +189,15 @@ class VegetablesLevel : AbstractLevelActivity() {
         }
     }
 
+    private fun openResultScreen() {
+        val intent = Intent(this, VegetableLevelResultActivity::class.java)
+        intent.putExtra(CommonLevelSettingsActivity.PARAM_FIGURES_NUMBER, figuresNumber)
+        intent.putExtra(CommonLevelSettingsActivity.PARAM_FIGURE_SIZE, figureSize)
+        startActivity(intent)
+    }
+
     override fun finishLevel() {
-        // TODO show finish modal (with replay level button or exit)
+        openResultScreen()
         finish()
     }
 
