@@ -115,7 +115,8 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="7"
+                android:backgroundTint="@color/background_yellow"
+                android:onClick="selectYellow"
                 android:textSize="20sp" />
 
             <Button
@@ -124,7 +125,8 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="8"
+                android:backgroundTint="@color/background_green"
+                android:onClick="selectGreen"
                 android:textSize="20sp" />
 
             <Button
@@ -133,7 +135,8 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="9"
+                android:backgroundTint="@color/background_aqua"
+                android:onClick="selectAqua"
                 android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
