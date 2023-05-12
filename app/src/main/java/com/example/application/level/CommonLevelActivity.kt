@@ -18,6 +18,10 @@ class CommonLevelActivity: AbstractLevelActivity() {
         const val PARAM_IS_WIN = "PARAM_IS_WIN"
     }
 
+    init {
+        FPS = 20
+    }
+
     var clickTime: Int = -1
     var figuresNumber: Int = -1
     var figureSize: Int = -1
@@ -39,6 +43,7 @@ class CommonLevelActivity: AbstractLevelActivity() {
 
     private fun handleInfoViews() {
         scoreView = findViewById(R.id.score)
+//        scoreView.text = "88/88"
         durationView = findViewById(R.id.duration)
         if (globalSettings.backgroundColor.isDark()) {
             scoreView.setTextColor(Color.WHITE)
@@ -89,9 +94,11 @@ class CommonLevelActivity: AbstractLevelActivity() {
     }
 
     override fun finishLevel() {
-        threadQuit = true
-        openResultScreen()
-        finish()
+        if (!threadQuit) {
+            threadQuit = true
+            openResultScreen()
+            finish()
+        }
     }
 
     private fun openResultScreen() {
@@ -105,12 +112,15 @@ class CommonLevelActivity: AbstractLevelActivity() {
 
     @SuppressLint("SetTextI18n")
     fun updateScore() {
-        scoreView.text = "${figuresNumber - figures.size}/${figuresNumber}"
+        val newText = "${figuresNumber - figures.size}/${figuresNumber}"
+        if (scoreView.text.toString() != newText) {
+            scoreView.setText(newText, TextView.BufferType.SPANNABLE)
+        }
     }
 
     @SuppressLint("SetTextI18n")
     fun updateDuration() {
-        updateScore()  // Я не знаю почему, но без обновленя счёта обновление времени не происходит
+//        updateScore()  // Я не знаю почему, но без обновленя счёта обновление времени не происходит
         val timeRemain = clickTime - (System.currentTimeMillis() - lastClickAt)
         if (timeRemain <= 0) {
             isWin = false
@@ -120,7 +130,7 @@ class CommonLevelActivity: AbstractLevelActivity() {
         val newText = "${timeRemain / 1000}.${timeRemain % 1000 / 100} сек "
 //        durationView.text = newText
         if (durationView.text.toString() != newText) {
-            durationView.text = newText
+            durationView.setText(newText, TextView.BufferType.SPANNABLE)
         }
     }
 
