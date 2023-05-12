@@ -1,6 +1,7 @@
 package com.example.application.level
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -13,6 +14,13 @@ import com.example.application.MyActivity
 import com.example.application.R
 import com.example.application.level.utils.LevelSettingsItem
 import com.example.application.level.utils.LevelSettingsItemViews
+import com.google.gson.Gson
+import java.io.BufferedReader
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.InputStreamReader
+import java.security.Key
+
 
 open class AbsLevelSettingsActivity: MyActivity() {
 
@@ -27,6 +35,8 @@ open class AbsLevelSettingsActivity: MyActivity() {
 
     private lateinit var settingViews: MutableList<LevelSettingsItemViews>
 
+    var settingsFilename: String = ""
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +45,17 @@ open class AbsLevelSettingsActivity: MyActivity() {
         initSettings()
     }
 
+    override fun onPause() {
+        super.onPause()
+
+        val settingsToSave = getSettingsJSONToSave()
+        writeToFile(settingsFilename, settingsToSave)
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     private fun initSettings() {
+        settingsFilename = this.javaClass.simpleName
+
         initResultSettings()
         findSettingsViews()
         updateSettingViews()
@@ -44,8 +63,46 @@ open class AbsLevelSettingsActivity: MyActivity() {
     }
 
     private fun initResultSettings() {
+        val settingsFileContent = readFromFile(settingsFilename)
+        val loadedSettingsMap: Map<String, Any>
+        if (settingsFileContent.isNotEmpty())
+            loadedSettingsMap = fromJson(settingsFileContent)
+        else
+            loadedSettingsMap = mapOf()
+
         for (setting in SETTINGS) {
-            resultSettings[setting.name] = setting.startValue
+            if (loadedSettingsMap.containsKey(setting.name)) {
+                println(setting.name)
+                println(loadedSettingsMap[setting.name])
+                resultSettings[setting.name] = (loadedSettingsMap[setting.name] as Double).toInt()
+            } else {
+                resultSettings[setting.name] = setting.startValue
+            }
+        }
+    }
+
+    fun readFromFile(filename: String): String {
+        var fileContents = ""
+        try {
+            val inputStream: FileInputStream = openFileInput(filename)
+            val inputStreamReader = InputStreamReader(inputStream)
+            val bufferedReader = BufferedReader(inputStreamReader)
+            fileContents = bufferedReader.readText()
+            inputStream.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return fileContents
+    }
+
+    fun writeToFile(filename: String, content: String) {
+        // Warning! This function overrides all content in file
+        try {
+            val outputStream: FileOutputStream = openFileOutput(filename, Context.MODE_PRIVATE)
+            outputStream.write(content.toByteArray())
+            outputStream.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -73,15 +130,16 @@ open class AbsLevelSettingsActivity: MyActivity() {
         for (i in settingViews.indices) {
             val settingsItem = SETTINGS[i]
             val views = settingViews[i]
+            val startValue = resultSettings[settingsItem.name]!!
 
             views.nameView.text = settingsItem.name
             if (settingsItem.name == "Длительность")
-                views.valueView.text = "${settingsItem.startValue / 10}.${settingsItem.startValue % 10}"
+                views.valueView.text = "${startValue / 10}.${startValue % 10}"
             else
-                views.valueView.text = settingsItem.startValue.toString()
+                views.valueView.text = startValue.toString()
             views.seekBar.min = settingsItem.minValue / settingsItem.step
             views.seekBar.max = settingsItem.maxValue / settingsItem.step
-            views.seekBar.progress = settingsItem.startValue / settingsItem.step
+            views.seekBar.progress = startValue / settingsItem.step
 
             views.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                 @SuppressLint("SetTextI18n")
@@ -137,6 +195,15 @@ open class AbsLevelSettingsActivity: MyActivity() {
         startActivity(levelIntent)
     }
 
+    protected fun toJson(map: Map<String, Any>): String {
+        return Gson().toJson(map)
+    }
+
+    protected fun fromJson(jsonString: String): Map<String, Any> {
+        println(jsonString)
+        return Gson().fromJson(jsonString, Map::class.java) as Map<String, Any>
+    }
+
     /** Ниже функции, которые можно переопределять */
 
     open fun loadContentView() {
@@ -152,6 +219,10 @@ open class AbsLevelSettingsActivity: MyActivity() {
 
         // you must define this
         throw NotImplementedError()
+    }
+
+    open fun getSettingsJSONToSave(): String {
+        return toJson(resultSettings)
     }
 
     // also define SETTINGS
