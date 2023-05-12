@@ -37,6 +37,18 @@
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
+            android:name=".level.coinlevel.CoinVictoryScreen"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".level.coinlevel.CoinSettings"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".level.coinlevel.CoinLevel"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".level.VegetablesLevel"
             android:exported="false"
             android:screenOrientation="landscape" />

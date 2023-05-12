@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".SpecialLevels">
 
+
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
@@ -44,11 +45,19 @@
             <Button
                 android:id="@+id/button3"
                 android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:onClick="onCoinButtonButton"
+                android:text="Дождь из монет" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_margin="5dp"
                 android:onClick="onBubbleButtonButton"
                 android:text="Пузыри" />
         </LinearLayout>
+
     </ScrollView>
 
     <ImageView

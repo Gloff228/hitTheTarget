@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:screenOrientation="landscape">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/containerForCoinSize"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginTop="25dp"
+                    android:src="@drawable/counter" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Размер"
+                    android:textSize="50sp"
+                    android:layout_alignStart="@+id/containerForCoinSize"
+                    android:layout_alignTop="@+id/containerForCoinSize"
+                    android:layout_alignEnd="@+id/containerForCoinSize"
+                    android:layout_alignBottom="@+id/containerForCoinSize"/>
+
+                <ImageView
+                    android:id="@+id/containerForNumericSize"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="35dp"
+                    android:src="@drawable/counter" />
+
+                <TextView
+                    android:id="@+id/coinSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textSize="50sp"
+                    android:layout_alignStart="@+id/containerForNumericSize"
+                    android:layout_alignTop="@+id/containerForNumericSize"
+                    android:layout_alignEnd="@+id/containerForNumericSize"
+                    android:layout_alignBottom="@+id/containerForNumericSize"/>
+
+                <SeekBar
+                    android:id="@+id/seekBarSize"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:min="1"
+                    android:max="50"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toStartOf="@+id/containerForNumericSize"
+                    android:layout_toEndOf="@+id/containerForCoinSize" />
+
+                <ImageView
+                    android:id="@+id/returnButton"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    app:srcCompat="@android:drawable/ic_menu_revert"
+                    android:clickable="true"
+                    android:onClick="onClickReturnButton"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:focusable="true" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/containerForCoinCounter"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="35dp"
+                    android:src="@drawable/counter"
+                    tools:ignore="NotSibling" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Количество"
+                    android:textSize="50sp"
+                    android:gravity="center"
+                    android:layout_alignTop="@+id/containerForCoinCounter"
+                    android:layout_alignBottom="@+id/containerForCoinCounter"
+                    android:layout_alignStart="@+id/containerForCoinCounter"
+                    android:layout_alignEnd="@+id/containerForCoinCounter"/>
+
+                <ImageView
+                    android:id="@+id/containerForNumericCoinCounter"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:src="@drawable/counter"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="35dp"
+                    android:layout_marginTop="25dp"/>
+
+                <TextView
+                    android:id="@+id/coinCounter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textSize="50sp"
+                    android:gravity="center"
+                    android:layout_alignTop="@+id/containerForNumericCoinCounter"
+                    android:layout_alignBottom="@+id/containerForNumericCoinCounter"
+                    android:layout_alignStart="@+id/containerForNumericCoinCounter"
+                    android:layout_alignEnd="@+id/containerForNumericCoinCounter" />
+
+                <SeekBar
+                    android:id="@+id/seekBarCounter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:min="10"
+                    android:max="100"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/containerForCoinCounter"
+                    android:layout_toStartOf="@+id/containerForNumericCoinCounter"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/containerForCoinSpeed"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginTop="25dp"
+                    android:src="@drawable/counter"
+                    tools:ignore="NotSibling" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Скорость"
+                    android:textSize="50sp"
+                    android:gravity="center"
+                    android:layout_alignTop="@+id/containerForCoinSpeed"
+                    android:layout_alignBottom="@+id/containerForCoinSpeed"
+                    android:layout_alignStart="@+id/containerForCoinSpeed"
+                    android:layout_alignEnd="@+id/containerForCoinSpeed"/>
+
+                <ImageView
+                    android:id="@+id/containerForNumericCoinSpeed"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:src="@drawable/counter"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="35dp"
+                    android:layout_marginTop="25dp" />
+
+                <TextView
+                    android:id="@+id/coinSpeed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textSize="50sp"
+                    android:gravity="center"
+                    android:layout_alignTop="@+id/containerForNumericCoinSpeed"
+                    android:layout_alignBottom="@+id/containerForNumericCoinSpeed"
+                    android:layout_alignStart="@+id/containerForNumericCoinSpeed"
+                    android:layout_alignEnd="@+id/containerForNumericCoinSpeed" />
+
+                <SeekBar
+                    android:id="@+id/seekBarSpeed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:min="1"
+                    android:max="30"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/containerForCoinSpeed"
+                    android:layout_toStartOf="@+id/containerForNumericCoinSpeed"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/coinLevelStart"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:src="@drawable/counter"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="onPlayButtonClick" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Играть"
+                    android:textSize="50sp"
+                    android:gravity="center"
+                    android:layout_alignTop="@+id/coinLevelStart"
+                    android:layout_alignBottom="@+id/coinLevelStart"
+                    android:layout_alignStart="@+id/coinLevelStart"
+                    android:layout_alignEnd="@+id/coinLevelStart" />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

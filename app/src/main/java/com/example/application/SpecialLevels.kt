@@ -9,6 +9,7 @@ import com.example.application.level.StarLevelSettings
 import com.example.application.level.VegetableLevelSettingsActivity
 import com.example.application.level.VegetablesLevel
 import com.example.application.level.bubblelevel.BubbleSettings
+import com.example.application.level.coinlevel.CoinSettings
 
 class SpecialLevels : MyActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,8 +21,12 @@ class SpecialLevels : MyActivity() {
         finish()
     }
 
-    fun onBubbleButtonButton(view: View) {
+    fun  onBubbleButtonButton(view: View) {
         startActivity(Intent(this, BubbleSettings::class.java))
+    }
+
+    fun onCoinButtonButton(view: View) {
+        startActivity(Intent(this, CoinSettings::class.java))
     }
 
     fun onStarButtonClick(view: View) {
