@@ -1,5 +1,6 @@
 package com.example.application
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -14,9 +15,16 @@ import com.example.application.utils.BackgroundColor
 import com.example.application.utils.Settings
 import com.example.application.utils.TargetColor
 import com.example.application.utils.globalSettings
+import com.google.gson.Gson
+import java.io.BufferedReader
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.InputStreamReader
 
 
 open class MyActivity : AppCompatActivity() {
+    private val globalSettingsFilename = "globalSettings"
+
     val settings: Settings = globalSettings
 
     open var NEED_HANDLE_DARK_MODE = true
@@ -81,4 +89,65 @@ open class MyActivity : AppCompatActivity() {
         hideElements()
     }
 
+    fun readFromFile(filename: String): String {
+        var fileContents = ""
+        try {
+            val inputStream: FileInputStream = openFileInput(filename)
+            val inputStreamReader = InputStreamReader(inputStream)
+            val bufferedReader = BufferedReader(inputStreamReader)
+            fileContents = bufferedReader.readText()
+            inputStream.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return fileContents
+    }
+
+    fun writeToFile(filename: String, content: String) {
+        // Warning! This function overrides all content in file
+        try {
+            val outputStream: FileOutputStream = openFileOutput(filename, Context.MODE_PRIVATE)
+            outputStream.write(content.toByteArray())
+            outputStream.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    protected fun saveGlobalSettings() {
+        val settingsToSave = mutableMapOf<String, Any>(
+            "backgroundColor" to settings.backgroundColor,
+            "targetColor" to settings.targetColor,
+            "outlineColor" to settings.outlineColor,
+        )
+        val settingsJSON = toJson(settingsToSave)
+        writeToFile(globalSettingsFilename, settingsJSON)
+    }
+
+    protected fun restoreGlobalSettings() {
+        val restoredSettingsJSON = readFromFile(globalSettingsFilename)
+        if (restoredSettingsJSON.isEmpty()) return
+        val restoredSettings = fromJson(restoredSettingsJSON)
+
+        if (restoredSettings.containsKey("backgroundColor")) {
+            settings.backgroundColor =
+                BackgroundColor.valueOf(restoredSettings["backgroundColor"] as String)
+        }
+        if (restoredSettings.containsKey("targetColor")) {
+            settings.targetColor =
+                TargetColor.valueOf(restoredSettings["targetColor"] as String)
+        }
+        if (restoredSettings.containsKey("outlineColor")) {
+            settings.outlineColor =
+                TargetColor.valueOf(restoredSettings["outlineColor"] as String)
+        }
+    }
+
+    protected fun toJson(map: Map<String, Any>): String {
+        return Gson().toJson(map)
+    }
+
+    protected fun fromJson(jsonString: String): Map<String, Any> {
+        return Gson().fromJson(jsonString, Map::class.java) as Map<String, Any>
+    }
 }
