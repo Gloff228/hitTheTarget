@@ -12,6 +12,12 @@ class BackgroundScreen : MyActivity() {
         setContentView(R.layout.activity_background_screen)
     }
 
+    override fun onStop() {
+        super.onStop()
+
+        saveGlobalSettings()
+    }
+
     private fun handleColorChange() {
         if (settings.backgroundColor.isDark()) {
             handleDarkMode()

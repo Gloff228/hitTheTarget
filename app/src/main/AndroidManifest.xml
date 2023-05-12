@@ -25,7 +25,7 @@
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".level.bubblelevel.BubbleVictoryScreen"
+            android:name=".level.bubblelevel.BubbleLevelResultActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
@@ -54,6 +54,10 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".level.VegetableLevelSettingsActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".level.VegetableLevelResultActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity

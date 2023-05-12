@@ -137,7 +137,7 @@ class BubbleLevel: AbstractLevelActivity() {
     }
 
     override fun finishLevel() {
-        val intent = Intent(this, BubbleVictoryScreen::class.java)
+        val intent = Intent(this, BubbleLevelResultActivity::class.java)
         intent.putExtra(BubbleSettings.PARAM_FIGURES_NUMBER, figuresNumber)
         intent.putExtra(BubbleSettings.PARAM_FIGURE_SIZE, figureSize)
         intent.putExtra(BubbleSettings.PARAM_SPEED, bubSpeed)
