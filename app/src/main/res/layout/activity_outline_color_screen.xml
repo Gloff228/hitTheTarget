@@ -52,7 +52,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:backgroundTint="@color/gray"
+                android:backgroundTint="@color/black"
                 android:onClick="selectBlack"
                 android:textSize="20sp" />
 
@@ -136,7 +136,8 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="9"
+                android:backgroundTint="@color/darkGreen"
+                android:onClick="selectDarkGreen"
                 android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>

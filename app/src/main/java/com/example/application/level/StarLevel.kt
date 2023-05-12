@@ -1,24 +1,26 @@
 package com.example.application.level
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
 import android.widget.ImageView
-import android.widget.ScrollView
-import android.widget.SeekBar
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.application.MyActivity
 import com.example.application.R
-import com.example.application.utils.starSettings
-import kotlin.math.roundToInt
 import kotlin.random.Random
 
 class StarLevel : MyActivity() {
-
+    var figureScale: Float = 3f
+    var figuresNumber: Int = 20
+    var figureSize: Int = 100
+    var animationTime: Long = 1000
+    lateinit var scoreView: TextView
     private var stars: MutableList<ImageView> = mutableListOf()
     private var currentStar: Int = 0
     private val starColours = mutableListOf(
@@ -35,11 +37,36 @@ class StarLevel : MyActivity() {
         NEED_HANDLE_DARK_MODE = false
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_star_level)
+        scoreView = findViewById(R.id.score)
+
+        getSettings()
+        drawStars()
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun updateScore() {
+        scoreView.text = "${currentStar}/${figuresNumber}"
+    }
+
     private fun randomFloat(): Float {
         var randomFloat = Random.nextFloat()
         if (randomFloat < 0.07f) randomFloat = 0.07f
         else if (randomFloat > 0.93f) randomFloat = 0.93f
         return randomFloat
+    }
+
+    private fun getSettings() {
+        figuresNumber = intent.getIntExtra(StarLevelSettings.PARAM_FIGURES_NUMBER, 20)
+        figureSize = intent.getIntExtra(StarLevelSettings.PARAM_FIGURE_SIZE, 100)
+        figureScale = intent.getIntExtra(StarLevelSettings.PARAM_FIGURE_SCALE, 3).toFloat()
+        animationTime = intent.getIntExtra(StarLevelSettings.PARAM_ANIMATION_TIME, 1000).toLong()
+        if (animationTime == 0L) {
+            animationTime = 1
+        }
     }
 
     private fun createStar(size: Int): ImageView {
@@ -61,10 +88,12 @@ class StarLevel : MyActivity() {
     }
 
     private fun drawStars() {
-        currentStar = starSettings.maxCount - 1
+        currentStar = figuresNumber
+        updateScore()
+        currentStar--
         val layout = findViewById<ConstraintLayout>(R.id.layout)
-        for (i in 0 until starSettings.maxCount) {
-            val star = createStar(starSettings.size)
+        for (i in 0 until figuresNumber) {
+            val star = createStar(figureSize)
             layout.addView(star)
             stars.add(star)
         }
@@ -73,17 +102,17 @@ class StarLevel : MyActivity() {
 
     private fun createAnimation(star: ImageView) {
         val anim = ScaleAnimation(
-            1f, starSettings.scale, 1f, starSettings.scale,
+            1f, figureScale, 1f, figureScale,
             Animation.RELATIVE_TO_SELF, 0.5f,
             Animation.RELATIVE_TO_SELF, 0.5f
         ).apply {
-            duration = starSettings.duration
+            duration = animationTime
             repeatCount = 1
             setAnimationListener(object : Animation.AnimationListener {
                 override fun onAnimationStart(animation: Animation?) {}
                 override fun onAnimationRepeat(animation: Animation?) {
-                    star.scaleX = starSettings.scale // новый масштаб по X
-                    star.scaleY = starSettings.scale // новый масштаб по Y
+                    star.scaleX = figureScale // новый масштаб по X
+                    star.scaleY = figureScale // новый масштаб по Y
                     animation?.cancel()
                 }
 
@@ -96,126 +125,26 @@ class StarLevel : MyActivity() {
 
         star.setOnClickListener {
             anim.cancel()
-            star.scaleX = 0f // новый масштаб по X
-            star.scaleY = 0f // новый масштаб по Y
+            updateScore()
+            star.scaleX = 0f
+            star.scaleY = 0f
             star.visibility = View.GONE
             currentStar--
             if (currentStar >= 0) {
                 createAnimation(stars[currentStar])
             } else {
-                finish()
+                finishLevel()
             }
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun createCountSeekBar() {
-        val countSeekBar = findViewById<SeekBar>(R.id.seekBar)
-        countSeekBar.min = 10
-        countSeekBar.max = 30
-        countSeekBar.progress = starSettings.maxCount
-
-        val countTextView = findViewById<TextView>(R.id.textView1)
-        countTextView.text = "${countSeekBar.progress} звёзд"
-
-        countSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                countTextView.text = "$progress звёзд"
-                starSettings.maxCount = progress
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-        })
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun createSizeSeekBar() {
-        val sizeSeekBar = findViewById<SeekBar>(R.id.seekBar2)
-        sizeSeekBar.min = 50
-        sizeSeekBar.max = 150
-        sizeSeekBar.progress = starSettings.size
-
-        val countTextView = findViewById<TextView>(R.id.textView2)
-        countTextView.text = "${sizeSeekBar.progress}"
-
-        sizeSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                val prg = (progress.toDouble() / 10).roundToInt() * 10
-                countTextView.text = "$prg"
-                starSettings.size = prg
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-        })
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun createScaleSeekBar() {
-        val scaleSeekBar = findViewById<SeekBar>(R.id.seekBar3)
-        scaleSeekBar.min = 2
-        scaleSeekBar.max = 4
-        scaleSeekBar.progress = starSettings.scale.toInt()
-
-        val countTextView = findViewById<TextView>(R.id.textView3)
-        countTextView.text = "в ${scaleSeekBar.progress} раза"
-
-        scaleSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                countTextView.text = "в $progress раза"
-                starSettings.scale = progress.toFloat()
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-        })
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun createDurationSeekBar() {
-        val durationSeekBar = findViewById<SeekBar>(R.id.seekBar4)
-        durationSeekBar.min = 1
-        durationSeekBar.max = 2000
-        durationSeekBar.progress = starSettings.duration.toInt()
-
-        val countTextView = findViewById<TextView>(R.id.textView4)
-        countTextView.text =
-            "${Math.round(durationSeekBar.progress.toDouble() / 100).toDouble() / 10} сек"
-
-        durationSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                val prg = Math.round(progress.toDouble() / 100).toDouble() / 10
-                countTextView.text = "$prg сек"
-                if (prg == 0.0) {
-                    starSettings.duration = 1
-                } else {
-                    starSettings.duration = (prg * 1000).toLong()
-                }
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-        })
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_star_level)
-        createCountSeekBar()
-        createSizeSeekBar()
-        createScaleSeekBar()
-        createDurationSeekBar()
-    }
-
-    fun onClickButtonCreate(view: View) {
-        findViewById<ScrollView>(R.id.scrollView).visibility = View.GONE
-        findViewById<ImageView>(R.id.returnButton).visibility = View.GONE
-        drawStars()
-    }
-
-    fun onClickReturnButton(view: View) {
+    private fun finishLevel() {
+        val intent = Intent(this, StarLevelResultActivity::class.java)
+        intent.putExtra(StarLevelSettings.PARAM_FIGURES_NUMBER, figuresNumber)
+        intent.putExtra(StarLevelSettings.PARAM_FIGURE_SIZE, figureSize)
+        intent.putExtra(StarLevelSettings.PARAM_FIGURE_SCALE, figureScale.toInt())
+        intent.putExtra(StarLevelSettings.PARAM_ANIMATION_TIME, animationTime.toInt())
+        startActivity(intent)
         finish()
     }
 }

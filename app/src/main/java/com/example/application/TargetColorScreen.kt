@@ -20,8 +20,8 @@ class TargetColorScreen : MyActivity() {
         setTargetColor(TargetColor.WHITE)
     }
 
-    fun selectGray(view: View) {
-        setTargetColor(TargetColor.GRAY)
+    fun selectBlack(view: View) {
+        setTargetColor(TargetColor.BLACK)
     }
 
     fun selectPink(view: View) {
@@ -48,8 +48,13 @@ class TargetColorScreen : MyActivity() {
         setTargetColor(TargetColor.GREEN)
     }
 
+    fun selectDarkGreen(view: View) {
+        setTargetColor(TargetColor.DARKGREEN)
+    }
+
     fun onClickButtonSettingsBack(view: View) {
         finish()
     }
+
 
 }

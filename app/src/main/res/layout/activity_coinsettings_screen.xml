@@ -21,7 +21,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/containerForBubbleSize"
+                    android:id="@+id/containerForCoinSize"
                     android:layout_width="250dp"
                     android:layout_height="250dp"
                     android:layout_marginStart="35dp"
@@ -34,10 +34,10 @@
                     android:gravity="center"
                     android:text="Размер"
                     android:textSize="50sp"
-                    android:layout_alignStart="@+id/containerForBubbleSize"
-                    android:layout_alignTop="@+id/containerForBubbleSize"
-                    android:layout_alignEnd="@+id/containerForBubbleSize"
-                    android:layout_alignBottom="@+id/containerForBubbleSize"/>
+                    android:layout_alignStart="@+id/containerForCoinSize"
+                    android:layout_alignTop="@+id/containerForCoinSize"
+                    android:layout_alignEnd="@+id/containerForCoinSize"
+                    android:layout_alignBottom="@+id/containerForCoinSize"/>
 
                 <ImageView
                     android:id="@+id/containerForNumericSize"
@@ -49,7 +49,7 @@
                     android:src="@drawable/counter" />
 
                 <TextView
-                    android:id="@+id/bubbleSize"
+                    android:id="@+id/coinSize"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -70,7 +70,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_toStartOf="@+id/containerForNumericSize"
-                    android:layout_toEndOf="@+id/containerForBubbleSize" />
+                    android:layout_toEndOf="@+id/containerForCoinSize" />
 
                 <ImageView
                     android:id="@+id/returnButton"
@@ -91,7 +91,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/containerForBubbleCounter"
+                    android:id="@+id/containerForCoinCounter"
                     android:layout_width="250dp"
                     android:layout_height="250dp"
                     android:layout_marginStart="25dp"
@@ -105,13 +105,13 @@
                     android:text="Количество"
                     android:textSize="50sp"
                     android:gravity="center"
-                    android:layout_alignTop="@+id/containerForBubbleCounter"
-                    android:layout_alignBottom="@+id/containerForBubbleCounter"
-                    android:layout_alignStart="@+id/containerForBubbleCounter"
-                    android:layout_alignEnd="@+id/containerForBubbleCounter"/>
+                    android:layout_alignTop="@+id/containerForCoinCounter"
+                    android:layout_alignBottom="@+id/containerForCoinCounter"
+                    android:layout_alignStart="@+id/containerForCoinCounter"
+                    android:layout_alignEnd="@+id/containerForCoinCounter"/>
 
                 <ImageView
-                    android:id="@+id/containerForNumericBubbleCounter"
+                    android:id="@+id/containerForNumericCoinCounter"
                     android:layout_width="250dp"
                     android:layout_height="250dp"
                     android:src="@drawable/counter"
@@ -120,16 +120,16 @@
                     android:layout_marginTop="25dp"/>
 
                 <TextView
-                    android:id="@+id/bubbleCounter"
+                    android:id="@+id/coinCounter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="10"
                     android:textSize="50sp"
                     android:gravity="center"
-                    android:layout_alignTop="@+id/containerForNumericBubbleCounter"
-                    android:layout_alignBottom="@+id/containerForNumericBubbleCounter"
-                    android:layout_alignStart="@+id/containerForNumericBubbleCounter"
-                    android:layout_alignEnd="@+id/containerForNumericBubbleCounter" />
+                    android:layout_alignTop="@+id/containerForNumericCoinCounter"
+                    android:layout_alignBottom="@+id/containerForNumericCoinCounter"
+                    android:layout_alignStart="@+id/containerForNumericCoinCounter"
+                    android:layout_alignEnd="@+id/containerForNumericCoinCounter" />
 
                 <SeekBar
                     android:id="@+id/seekBarCounter"
@@ -140,8 +140,8 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/containerForBubbleCounter"
-                    android:layout_toStartOf="@+id/containerForNumericBubbleCounter"/>
+                    android:layout_toEndOf="@+id/containerForCoinCounter"
+                    android:layout_toStartOf="@+id/containerForNumericCoinCounter"/>
 
             </RelativeLayout>
 
@@ -150,7 +150,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/containerForBubbleSpeed"
+                    android:id="@+id/containerForCoinSpeed"
                     android:layout_width="250dp"
                     android:layout_height="250dp"
                     android:layout_marginStart="35dp"
@@ -164,13 +164,13 @@
                     android:text="Скорость"
                     android:textSize="50sp"
                     android:gravity="center"
-                    android:layout_alignTop="@+id/containerForBubbleSpeed"
-                    android:layout_alignBottom="@+id/containerForBubbleSpeed"
-                    android:layout_alignStart="@+id/containerForBubbleSpeed"
-                    android:layout_alignEnd="@+id/containerForBubbleSpeed"/>
+                    android:layout_alignTop="@+id/containerForCoinSpeed"
+                    android:layout_alignBottom="@+id/containerForCoinSpeed"
+                    android:layout_alignStart="@+id/containerForCoinSpeed"
+                    android:layout_alignEnd="@+id/containerForCoinSpeed"/>
 
                 <ImageView
-                    android:id="@+id/containerForNumericBubbleSpeed"
+                    android:id="@+id/containerForNumericCoinSpeed"
                     android:layout_width="250dp"
                     android:layout_height="250dp"
                     android:src="@drawable/counter"
@@ -179,16 +179,16 @@
                     android:layout_marginTop="25dp" />
 
                 <TextView
-                    android:id="@+id/bubbleSpeed"
+                    android:id="@+id/coinSpeed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1"
                     android:textSize="50sp"
                     android:gravity="center"
-                    android:layout_alignTop="@+id/containerForNumericBubbleSpeed"
-                    android:layout_alignBottom="@+id/containerForNumericBubbleSpeed"
-                    android:layout_alignStart="@+id/containerForNumericBubbleSpeed"
-                    android:layout_alignEnd="@+id/containerForNumericBubbleSpeed" />
+                    android:layout_alignTop="@+id/containerForNumericCoinSpeed"
+                    android:layout_alignBottom="@+id/containerForNumericCoinSpeed"
+                    android:layout_alignStart="@+id/containerForNumericCoinSpeed"
+                    android:layout_alignEnd="@+id/containerForNumericCoinSpeed" />
 
                 <SeekBar
                     android:id="@+id/seekBarSpeed"
@@ -199,8 +199,8 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/containerForBubbleSpeed"
-                    android:layout_toStartOf="@+id/containerForNumericBubbleSpeed"/>
+                    android:layout_toEndOf="@+id/containerForCoinSpeed"
+                    android:layout_toStartOf="@+id/containerForNumericCoinSpeed"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -208,7 +208,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/bubbleLevelStart"
+                    android:id="@+id/coinLevelStart"
                     android:layout_width="250dp"
                     android:layout_height="250dp"
                     android:src="@drawable/counter"
@@ -224,10 +224,10 @@
                     android:text="Играть"
                     android:textSize="50sp"
                     android:gravity="center"
-                    android:layout_alignTop="@+id/bubbleLevelStart"
-                    android:layout_alignBottom="@+id/bubbleLevelStart"
-                    android:layout_alignStart="@+id/bubbleLevelStart"
-                    android:layout_alignEnd="@+id/bubbleLevelStart" />
+                    android:layout_alignTop="@+id/coinLevelStart"
+                    android:layout_alignBottom="@+id/coinLevelStart"
+                    android:layout_alignStart="@+id/coinLevelStart"
+                    android:layout_alignEnd="@+id/coinLevelStart" />
             </RelativeLayout>
 
         </LinearLayout>

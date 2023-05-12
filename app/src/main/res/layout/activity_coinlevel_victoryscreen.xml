@@ -9,7 +9,7 @@
 
 
     <ImageView
-        android:id="@+id/restartBubbleLevel"
+        android:id="@+id/restartCoinLevel"
         android:layout_width="200dp"
         android:layout_height="200dp"
         app:srcCompat="@drawable/counter"
@@ -28,16 +28,16 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ещё раз"
+        android:text="Играть"
         android:textSize="50sp"
         android:gravity="center"
-        app:layout_constraintTop_toTopOf="@id/restartBubbleLevel"
-        app:layout_constraintLeft_toLeftOf="@id/restartBubbleLevel"
-        app:layout_constraintRight_toRightOf="@id/restartBubbleLevel"
-        app:layout_constraintBottom_toBottomOf="@id/restartBubbleLevel"/>
+        app:layout_constraintTop_toTopOf="@id/restartCoinLevel"
+        app:layout_constraintLeft_toLeftOf="@id/restartCoinLevel"
+        app:layout_constraintRight_toRightOf="@id/restartCoinLevel"
+        app:layout_constraintBottom_toBottomOf="@id/restartCoinLevel"/>
 
     <ImageView
-        android:id="@+id/exitBubbleLevel"
+        android:id="@+id/exitCoinLevel"
         android:layout_width="200dp"
         android:layout_height="200dp"
         app:srcCompat="@drawable/counter"
@@ -59,9 +59,9 @@
         android:text="Выйти"
         android:textSize="50sp"
         android:gravity="center"
-        app:layout_constraintTop_toTopOf="@id/exitBubbleLevel"
-        app:layout_constraintLeft_toLeftOf="@id/exitBubbleLevel"
-        app:layout_constraintRight_toRightOf="@id/exitBubbleLevel"
-        app:layout_constraintBottom_toBottomOf="@id/exitBubbleLevel"/>
+        app:layout_constraintTop_toTopOf="@id/exitCoinLevel"
+        app:layout_constraintLeft_toLeftOf="@id/exitCoinLevel"
+        app:layout_constraintRight_toRightOf="@id/exitCoinLevel"
+        app:layout_constraintBottom_toBottomOf="@id/exitCoinLevel"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

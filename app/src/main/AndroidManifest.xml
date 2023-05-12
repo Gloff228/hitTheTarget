@@ -15,9 +15,13 @@
         <activity
             android:name=".OutlineColorScreen"
             android:exported="false"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".level.StarLevel"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".level.StarLevelResultActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
@@ -33,11 +37,27 @@
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
+            android:name=".level.coinlevel.CoinVictoryScreen"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".level.coinlevel.CoinSettings"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".level.coinlevel.CoinLevel"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".level.VegetablesLevel"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
             android:name=".level.VegetableLevelSettingsActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".level.StarLevelSettings"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity

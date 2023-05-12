@@ -57,8 +57,24 @@ class BackgroundScreen : MyActivity() {
         handleColorChange()
     }
 
+    fun selectYellow(view: View) {
+        setBackgroundColor(BackgroundColor.YELLOW)
+        handleColorChange()
+    }
+
+    fun selectGreen(view: View) {
+        setBackgroundColor(BackgroundColor.GREEN)
+        handleColorChange()
+    }
+
+    fun selectAqua(view: View) {
+        setBackgroundColor(BackgroundColor.AQUA)
+        handleColorChange()
+    }
+
     fun onClickButtonSettingsBack(view: View) {
         finish()
     }
+
 
 }
