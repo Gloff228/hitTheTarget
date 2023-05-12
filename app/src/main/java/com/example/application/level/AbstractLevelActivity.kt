@@ -13,11 +13,9 @@ import com.example.application.level.figures.FigureBase
 
 
 open class AbstractLevelActivity : MyActivity(), SurfaceHolder.Callback2 {
-    companion object {
-        const val FPS = 60
-        const val frameDurationMs = 1000 / FPS
-    }
 
+    open var FPS = 30
+    open var frameDurationMs = 1000 / FPS
 
     private val lock = Object()
     @Volatile var canRun = false
@@ -89,6 +87,9 @@ open class AbstractLevelActivity : MyActivity(), SurfaceHolder.Callback2 {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        frameDurationMs = 1000 / FPS
+
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.setDecorFitsSystemWindows(false)
