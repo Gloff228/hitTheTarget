@@ -31,9 +31,9 @@ class CommonLevelResultActivity: MyActivity() {
         val descriptionView = findViewById<TextView>(R.id.description)
 
         if (isWin) {
-            resultTextView.text = "Победа"
+            resultTextView.text = "Победа!"
             resultTextView.setTextColor(Color.GREEN)
-            descriptionView.text = "Молодец, так держать"
+            descriptionView.text = "Молодец, так держать,\nТы отлично справился!"
         } else {
             resultTextView.text = "Поражение"
             resultTextView.setTextColor(Color.RED)
