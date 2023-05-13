@@ -25,25 +25,7 @@ class VegetablesLevel : AbstractLevelActivity() {
 
     lateinit var scoreView: TextView
 
-    init {
-        FPS = 30
-    }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        loadContentView()
-        getSettings()
-        handleInfoViews()
-
-        surface = findViewById(R.id.surface)
-        surface.holder.addCallback(this)
-        surface.setZOrderOnTop(true)
-        surface.holder.setFormat(PixelFormat.TRANSPARENT)
-
-        createLevel()
-    }
 
     private fun isPointInsideTrapezoid(d1: Dot, d2: Dot, d3: Dot, d4: Dot, point: Dot): Boolean {
         val b1 = (point.y - d1.y) * (d2.x - d1.x) > (point.x - d1.x) * (d2.y - d1.y)
@@ -137,28 +119,42 @@ class VegetablesLevel : AbstractLevelActivity() {
                 BitmapFactory.decodeResource(this.resources, R.drawable.tomato),
                 BitmapFactory.decodeResource(this.resources, R.drawable.watermelon),
             )
-
-            val vegetableImg = listOfVegetable.random()
             val sproutImage = BitmapFactory.decodeResource(this.resources, R.drawable.sprout)
+            val vegetableImg = listOfVegetable.random()
 
             val vegetable = Bitmap.createScaledBitmap(vegetableImg, figureSize, figureSize, false)
             val sprout = Bitmap.createScaledBitmap(sproutImage, 90, 90, false)
 
             //val position = generateRandomPosition(i % 3)
-
-            val padding = (figureSize * 0.3).toInt()
-
+            val position = Dot(Random.nextInt(0, WIDTH),
+                Random.nextInt(0, HEIGHT))
             val figure = FigureVegetable(vegetable, sprout)
-            figure.setPosition(
-                    Random.nextInt(padding, WIDTH - padding),
-            Random.nextInt(padding, HEIGHT - padding)
-            )
+            figure.setPosition(position.x - figureSize / 2, position.y - figureSize / 2)
             figure.bindLevel(this)
 
             figures.addLast(figure)
         }
         updateScore()
         figures.last().setActive()
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        createLevel()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        handleInfoViews()
+        getSettings()
+
+        surface = findViewById(R.id.surface)
+        surface.holder.addCallback(this)
+        surface.setZOrderOnTop(true)
+        surface.holder.setFormat(PixelFormat.TRANSPARENT)
     }
 
     private fun getSettings() {
@@ -182,6 +178,8 @@ class VegetablesLevel : AbstractLevelActivity() {
     fun updateScore() {
         scoreView.text = "${figures.size}/${figuresNumber}"
     }
+
+
 
     override fun setNewActiveFigure() {
         figures.removeLast()
