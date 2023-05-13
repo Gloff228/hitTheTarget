@@ -144,9 +144,15 @@ class VegetablesLevel : AbstractLevelActivity() {
             val vegetable = Bitmap.createScaledBitmap(vegetableImg, figureSize, figureSize, false)
             val sprout = Bitmap.createScaledBitmap(sproutImage, 90, 90, false)
 
-            val position = generateRandomPosition(i % 3)
+            //val position = generateRandomPosition(i % 3)
+
+            val padding = (figureSize * 0.3).toInt()
+
             val figure = FigureVegetable(vegetable, sprout)
-            figure.setPosition(position.x - figureSize / 2, position.y - figureSize / 2)
+            figure.setPosition(
+                    Random.nextInt(padding, WIDTH - padding),
+            Random.nextInt(padding, HEIGHT - padding)
+            )
             figure.bindLevel(this)
 
             figures.addLast(figure)
