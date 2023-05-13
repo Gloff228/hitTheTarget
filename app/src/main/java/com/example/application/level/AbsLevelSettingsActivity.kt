@@ -59,25 +59,7 @@ open class AbsLevelSettingsActivity: MyActivity() {
         findSettingsViews()
         updateSettingViews()
         deleteUnusedSettingViews()
-    }
-
-    private fun initResultSettings() {
-        val settingsFileContent = readFromFile(settingsFilename)
-        val loadedSettingsMap: Map<String, Any>
-        if (settingsFileContent.isNotEmpty())
-            loadedSettingsMap = fromJson(settingsFileContent)
-        else
-            loadedSettingsMap = mapOf()
-
-        for (setting in SETTINGS) {
-            if (loadedSettingsMap.containsKey(setting.name)) {
-                println(setting.name)
-                println(loadedSettingsMap[setting.name])
-                resultSettings[setting.name] = (loadedSettingsMap[setting.name] as Double).toInt()
-            } else {
-                resultSettings[setting.name] = setting.startValue
-            }
-        }
+        afterInitSettings()
     }
 
     @SuppressLint("DiscouragedApi")
@@ -169,6 +151,13 @@ open class AbsLevelSettingsActivity: MyActivity() {
         startActivity(levelIntent)
     }
 
+    protected fun getLoadedSettingsMap(): Map<String, Any> {
+        val settingsFileContent = readFromFile(settingsFilename)
+        if (settingsFileContent.isNotEmpty())
+            return fromJson(settingsFileContent)
+        return mapOf()
+    }
+
     /** Ниже функции, которые можно переопределять */
 
     open fun loadContentView() {
@@ -188,6 +177,21 @@ open class AbsLevelSettingsActivity: MyActivity() {
 
     open fun getSettingsJSONToSave(): String {
         return toJson(resultSettings)
+    }
+
+    open fun initResultSettings() {
+        val loadedSettingsMap = getLoadedSettingsMap()
+        for (setting in SETTINGS) {
+            if (loadedSettingsMap.containsKey(setting.name)) {
+                resultSettings[setting.name] = (loadedSettingsMap[setting.name] as Double).toInt()
+            } else {
+                resultSettings[setting.name] = setting.startValue
+            }
+        }
+    }
+
+    open fun afterInitSettings() {
+        // define this
     }
 
     // also define SETTINGS

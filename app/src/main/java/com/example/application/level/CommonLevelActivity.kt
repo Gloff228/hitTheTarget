@@ -22,9 +22,11 @@ class CommonLevelActivity: AbstractLevelActivity() {
         FPS = 20
     }
 
+    // level settings
     var clickTime: Int = -1
     var figuresNumber: Int = -1
     var figureSize: Int = -1
+    var isAllFigures: Int = -1
 
     var lastClickAt: Long = 0  // milliseconds
 
@@ -73,10 +75,12 @@ class CommonLevelActivity: AbstractLevelActivity() {
     }
 
     private fun createFigures() {
+        val showInactive = if (isAllFigures == 0) false else true
         figures = ArrayDeque(figuresNumber)
         for (i in 1..figuresNumber) {
             val figure = FigureComCircle(figureSize)
             figure.bindLevel(this)
+            figure.setShowInactive(showInactive)
             val padding = (figureSize * 0.3).toInt()
             figure.setPosition(
                 Random.nextInt(padding, WIDTH - padding),
@@ -91,13 +95,15 @@ class CommonLevelActivity: AbstractLevelActivity() {
         figuresNumber = intent.getIntExtra(CommonLevelSettingsActivity.PARAM_FIGURES_NUMBER, -1)
         figureSize = intent.getIntExtra(CommonLevelSettingsActivity.PARAM_FIGURE_SIZE, -1)
         clickTime = intent.getIntExtra(CommonLevelSettingsActivity.PARAM_CLICK_TIME, -1) * 100
+        isAllFigures = intent.getIntExtra(CommonLevelSettingsActivity.PARAM_IS_ALL_FIGURES, -1)
     }
 
     override fun finishLevel() {
         if (!threadQuit) {
             threadQuit = true
-            openResultScreen()
+            finishActivity(0)
             finish()
+            openResultScreen()
         }
     }
 

@@ -4,7 +4,6 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.view.MotionEvent
 import com.example.application.level.AbstractLevelActivity
-import kotlin.random.Random
 import com.example.application.utils.globalSettings
 
 open class FigureBase() {
@@ -17,6 +16,7 @@ open class FigureBase() {
 
     var isActive = false
     var needRedraw = true
+    var needShowInactive = true
 
     val paint = Paint().apply {
         style = Paint.Style.FILL
@@ -35,6 +35,10 @@ open class FigureBase() {
 
     fun setActive() {
         isActive = true
+    }
+
+    fun setShowInactive(showInactive: Boolean) {
+        this.needShowInactive = showInactive
     }
 
     fun handleTouchEvent(event: MotionEvent, touchReached: Boolean = false): Boolean {

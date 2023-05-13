@@ -20,6 +20,7 @@ open class AbstractLevelActivity : MyActivity(), SurfaceHolder.Callback2 {
     private val lock = Object()
     @Volatile var canRun = false
     @Volatile var threadQuit = false
+    @Volatile var gameStarted = false
 
     lateinit var surface: SurfaceView
 
@@ -78,7 +79,6 @@ open class AbstractLevelActivity : MyActivity(), SurfaceHolder.Callback2 {
             needRedraw = false
         }
     }
-
 
     open fun setBackgroundColor(canvas: Canvas) {
         canvas.drawColor(settings.backgroundColor.rgb.toInt())
@@ -207,6 +207,22 @@ open class AbstractLevelActivity : MyActivity(), SurfaceHolder.Callback2 {
                 needRedraw = true
                 figure.needRedraw = false
             }
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        canRun = false
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (!gameStarted) {
+            gameStarted = true
+        } else {
+            canRun = true
         }
     }
 

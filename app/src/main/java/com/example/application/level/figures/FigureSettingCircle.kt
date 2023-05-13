@@ -7,15 +7,15 @@ import kotlin.math.min
 
 class FigureSettingCircle(
     diameter: Number,
-    private val outlinePercent: Double = 0.05
+    private val outlinePercent: Double = 0.1
 ): FigureComCircle(
     diameter,
     0.0,
     outlinePercent,
 ) {
     private val outlineColor = globalSettings.outlineColor.rgb.toInt()
-    private val outlineMinSize = 3.0
-    private val outlineMaxSize = 30.0
+    private val outlineMinSize = 6.0
+    private val outlineMaxSize = 60.0
 
     override fun draw(canvas: Canvas) {
         val outlineSize = min(max(radius * outlinePercent, outlineMinSize), outlineMaxSize)
