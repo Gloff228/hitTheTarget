@@ -19,7 +19,7 @@ class BubbleLevel: AbstractLevelActivity() {
 
     private lateinit var bubbleList: MutableList<FigureBubble>
     lateinit var currentBubble: FigureBubble
-    lateinit var drawingThread: Thread
+    var isRunning = true
     var bubbleCounter = 0
     var figuresNumber: Int = -1
     var figureSize: Int = -1
@@ -58,15 +58,13 @@ class BubbleLevel: AbstractLevelActivity() {
     }
 
     override fun surfaceCreated(surfaceHolder: SurfaceHolder) {
-        drawingThread = Thread {
-            while (!threadQuit) {
-                if (!canRun) {
-                    try {
-                        drawNewFrame(surfaceHolder)
-                        Thread.sleep(5)
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
+        val drawingThread = Thread {
+            while (isRunning) {
+                try {
+                    drawNewFrame(surfaceHolder)
+                    Thread.sleep(5)
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
             }
         }
@@ -141,17 +139,13 @@ class BubbleLevel: AbstractLevelActivity() {
     }
 
     override fun finishLevel() {
-
-        if (!threadQuit) {
-            threadQuit = true
-
-            val intent = Intent(this, BubbleLevelResultActivity::class.java)
-            intent.putExtra(BubbleSettings.PARAM_FIGURES_NUMBER, figuresNumber)
-            intent.putExtra(BubbleSettings.PARAM_FIGURE_SIZE, figureSize)
-            intent.putExtra(BubbleSettings.PARAM_SPEED, bubSpeed)
-            startActivity(intent)
-            finish()
-        }
+        isRunning = false
+        val intent = Intent(this, BubbleLevelResultActivity::class.java)
+        intent.putExtra(BubbleSettings.PARAM_FIGURES_NUMBER, figuresNumber)
+        intent.putExtra(BubbleSettings.PARAM_FIGURE_SIZE, figureSize)
+        intent.putExtra(BubbleSettings.PARAM_SPEED, bubSpeed)
+        startActivity(intent)
+        finish()
     }
 
     fun onClickReturnButton(view: View) {
