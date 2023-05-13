@@ -9,33 +9,36 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="320dp"
-        android:layout_height="250dp"
+        android:layout_width="310dp"
+        android:layout_height="300dp"
         android:layout_margin="5dp"
+        android:layout_marginStart="20dp"
         android:layout_weight="0.5"
         android:onClick="commonLevelButton"
         android:text="Обычный уровень"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.038"
+        app:layout_constraintHorizontal_bias="0.100"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.496" />
+        app:layout_constraintVertical_bias="0.600" />
 
     <Button
         android:id="@+id/button12"
-        android:layout_width="320dp"
-        android:layout_height="250dp"
+        android:layout_width="310dp"
+        android:layout_height="300dp"
         android:layout_margin="5dp"
+        android:layout_marginEnd="20dp"
         android:layout_weight="0.5"
+        android:elevation="10dp"
         android:onClick="specialButton"
         android:text="Дополнительные уровни"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.774"
-        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintHorizontal_bias="0.924"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.496" />
+        app:layout_constraintVertical_bias="0.600" />
 
     <ImageView
         android:id="@+id/returnButton2"
@@ -43,6 +46,7 @@
         android:layout_height="100dp"
         android:clickable="true"
         android:contentDescription="@string/back_to_main_menu"
+        android:elevation="20dp"
         android:focusable="true"
         android:onClick="onClickReturnButton"
         app:layout_constraintBottom_toBottomOf="parent"
