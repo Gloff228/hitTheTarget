@@ -46,11 +46,13 @@
             android:layout_height="100dp"
             android:layout_margin="5dp"
             android:onClick="onClickButtonBack"
-            android:text="Назад"
+            android:text="@string/back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/retryButton"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/rounded_corner"
+            />
 
         <Button
             android:id="@+id/retryButton"
@@ -58,11 +60,12 @@
             android:layout_height="100dp"
             android:layout_margin="5dp"
             android:onClick="onClickButtonRetry"
-            android:text="Ещё раз"
+            android:text="@string/again"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/backButton"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/rounded_corner"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
