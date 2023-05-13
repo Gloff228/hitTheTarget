@@ -37,7 +37,7 @@
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".level.coinlevel.CoinVictoryScreen"
+            android:name=".level.coinlevel.CoinLevelResultActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity

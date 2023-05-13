@@ -15,28 +15,34 @@ import com.example.application.R
 import com.example.application.level.AbstractLevelActivity
 import com.example.application.level.figures.FigureCoin
 
+var conSpeed: Int = -1
+
 class CoinLevel: AbstractLevelActivity() {
+
     private lateinit var coinList: MutableList<FigureCoin>
     lateinit var currentCoin: FigureCoin
-    private val coinSize = 4 * coefficientForSize + 350
     var coinCounter = 0
+    var figuresNumber: Int = -1
+    var figureSize: Int = -1
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coinlevel)
 
+        getSettings()
         setCounter()
+        createImage()
+
         surface = findViewById(R.id.coinSurface)
         surface.holder.addCallback(this)
         surface.setZOrderOnTop(true)
         surface.holder.setFormat(PixelFormat.TRANSPARENT)
 
+        if (coinCounter == figuresNumber) finishLevel()
     }
 
-    override fun onResume() {
-        super.onResume()
-
+    private fun createImage() {
         val coin1 = BitmapFactory.decodeResource(this.resources, R.drawable.coin1)
         val coin2 = BitmapFactory.decodeResource(this.resources, R.drawable.coin2)
         val coin3 = BitmapFactory.decodeResource(this.resources, R.drawable.coin5)
@@ -44,11 +50,11 @@ class CoinLevel: AbstractLevelActivity() {
         val coin5 = BitmapFactory.decodeResource(this.resources, R.drawable.coin50)
 
         coinList = mutableListOf(
-            FigureCoin(Bitmap.createScaledBitmap(coin1, coinSize, coinSize, false)),
-            FigureCoin(Bitmap.createScaledBitmap(coin2, coinSize, coinSize, false)),
-            FigureCoin(Bitmap.createScaledBitmap(coin3, coinSize, coinSize, false)),
-            FigureCoin(Bitmap.createScaledBitmap(coin4, coinSize, coinSize, false)),
-            FigureCoin(Bitmap.createScaledBitmap(coin5, coinSize, coinSize, false)),
+            FigureCoin(Bitmap.createScaledBitmap(coin1, figureSize, figureSize, false)),
+            FigureCoin(Bitmap.createScaledBitmap(coin2, figureSize, figureSize, false)),
+            FigureCoin(Bitmap.createScaledBitmap(coin3, figureSize, figureSize, false)),
+            FigureCoin(Bitmap.createScaledBitmap(coin4, figureSize, figureSize, false)),
+            FigureCoin(Bitmap.createScaledBitmap(coin5, figureSize, figureSize, false)),
         )
     }
 
@@ -68,7 +74,6 @@ class CoinLevel: AbstractLevelActivity() {
 
     private fun drawNewFrame(holder: SurfaceHolder) {
         val canvas = holder.lockCanvas()
-
         currentCoin = coinList[0]
 
         if (canvas != null) {
@@ -112,24 +117,36 @@ class CoinLevel: AbstractLevelActivity() {
         coinList.removeAt(0)
     }
 
+    private fun getSettings() {
+        figuresNumber = intent.getIntExtra(CoinSettings.PARAM_FIGURES_NUMBER, 1)
+        figureSize = intent.getIntExtra(CoinSettings.PARAM_FIGURE_SIZE, 1)
+        com.example.application.level.coinlevel.conSpeed = intent.getIntExtra(CoinSettings.PARAM_SPEED, 1)
+    }
+
     @SuppressLint("SetTextI18n")
     fun setCounter() {
         val textOfCounter = findViewById<TextView>(R.id.counterText)
-        textOfCounter.text = "0/$numberCoin"
+        textOfCounter.text = "0/${figuresNumber}"
     }
 
     @SuppressLint("SetTextI18n")
     private fun updateCounter() {
         val textOfCounter = findViewById<TextView>(R.id.counterText)
 
-        if (coinCounter < numberCoin - 1) {
-            coinCounter++
-            textOfCounter.text = "${coinCounter}/$numberCoin"
-        } else finishLevel()
+        coinCounter++
+        textOfCounter.text = "${coinCounter}/${figuresNumber}"
+        if (coinCounter == figuresNumber) finishLevel()
     }
 
     override fun finishLevel() {
-        startActivity(Intent(this, CoinVictoryScreen::class.java))
+        val intent = Intent(this, CoinLevelResultActivity::class.java)
+        intent.putExtra(CoinSettings.PARAM_FIGURES_NUMBER, figuresNumber)
+        intent.putExtra(CoinSettings.PARAM_FIGURE_SIZE, figureSize)
+        intent.putExtra(
+            CoinSettings.PARAM_SPEED,
+            com.example.application.level.coinlevel.conSpeed
+        )
+        startActivity(intent)
         finish()
     }
 

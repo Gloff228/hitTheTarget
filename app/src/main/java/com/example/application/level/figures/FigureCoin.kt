@@ -3,10 +3,10 @@ package com.example.application.level.figures
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import com.example.application.level.coinlevel.coefficientForSpeed
+import com.example.application.level.coinlevel.conSpeed
 
 class FigureCoin(img: Bitmap): FigureBase() {
-    private var coinSpeed = 5 + coefficientForSpeed
+    private var coinSpeed = conSpeed
     private val coin = img
 
     init {
