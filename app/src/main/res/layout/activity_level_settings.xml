@@ -23,24 +23,23 @@
         <GridLayout
             android:id="@+id/gridLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
             android:alignmentMode="alignBounds"
             android:columnCount="2"
+            android:padding="4dp"
             android:rowOrderPreserved="false"
-            android:useDefaultMargins="true"
-            android:layout_marginTop="10dp">
+            android:useDefaultMargins="true">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/setting1_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="0"
-                android:gravity="center"
                 android:layout_gravity="fill"
-                android:layout_marginBottom="10dp"
                 android:layout_marginEnd="12dp"
-                >
+                android:layout_marginBottom="10dp"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/settingName1"
@@ -70,8 +69,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/setting1_2"
-                android:gravity="center"
                 android:layout_gravity="fill"
+                android:gravity="center"
                 android:paddingEnd="80dp"
                 tools:ignore="RtlSymmetry">
 
@@ -92,9 +91,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="0"
-                android:gravity="center"
                 android:layout_gravity="fill"
-                >
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/settingName2"
@@ -124,8 +122,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/setting2_2"
-                android:gravity="center"
                 android:layout_gravity="fill"
+                android:gravity="center"
                 android:paddingEnd="80dp"
                 tools:ignore="RtlSymmetry">
 
@@ -146,9 +144,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="0"
-                android:gravity="center"
                 android:layout_gravity="fill"
-                >
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/settingName3"
@@ -178,8 +175,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/setting3_2"
-                android:gravity="center"
                 android:layout_gravity="fill"
+                android:gravity="center"
                 android:paddingEnd="80dp"
                 tools:ignore="RtlSymmetry">
 
@@ -200,9 +197,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="0"
-                android:gravity="center"
                 android:layout_gravity="fill"
-                >
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/settingName4"
@@ -232,8 +228,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/setting4_2"
-                android:gravity="center"
                 android:layout_gravity="fill"
+                android:gravity="center"
                 android:paddingEnd="80dp"
                 tools:ignore="RtlSymmetry">
 
@@ -254,9 +250,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="0"
-                android:gravity="center"
                 android:layout_gravity="fill"
-                >
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/settingName5"
@@ -286,8 +281,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/setting5_2"
-                android:gravity="center"
                 android:layout_gravity="fill"
+                android:gravity="center"
                 android:paddingEnd="80dp"
                 tools:ignore="RtlSymmetry">
 
@@ -303,16 +298,16 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
-                android:layout_marginTop="50dp"
                 android:id="@+id/buttonStart"
-                android:layout_columnWeight="0"
-                android:layout_columnSpan="2"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="149dp"
+                android:layout_columnSpan="2"
+                android:layout_columnWeight="0"
                 android:layout_margin="5dp"
-                android:textSize="20sp"
+                android:layout_marginTop="50dp"
                 android:onClick="onClickStartLevelButton"
-                android:text="Старт" />
+                android:text="Старт"
+                android:textSize="20sp" />
 
         </GridLayout>
 
