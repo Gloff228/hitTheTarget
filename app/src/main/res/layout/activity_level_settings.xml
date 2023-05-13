@@ -298,7 +298,7 @@
             <Button
                 android:id="@+id/buttonStart"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="100dp"
                 android:layout_columnSpan="2"
                 android:layout_columnWeight="0"
                 android:layout_margin="5dp"
