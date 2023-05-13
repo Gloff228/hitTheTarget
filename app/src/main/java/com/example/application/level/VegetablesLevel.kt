@@ -134,8 +134,11 @@ class VegetablesLevel : AbstractLevelActivity() {
 
             figures.addLast(figure)
         }
-        updateScore()
         figures.last().setActive()
+    }
+
+    override fun onLevelStart() {
+        updateScore()
     }
 
     override fun onStart() {
