@@ -50,6 +50,7 @@
         android:layout_height="100dp"
         android:clickable="true"
         android:contentDescription="@string/back_to_main_menu"
+        android:elevation="20dp"
         android:focusable="true"
         android:onClick="onClickReturnButton"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -59,4 +60,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@android:drawable/ic_menu_revert" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
