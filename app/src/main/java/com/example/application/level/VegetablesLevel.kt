@@ -180,8 +180,6 @@ class VegetablesLevel : AbstractLevelActivity() {
         scoreView.text = "${figures.size}/${figuresNumber}"
     }
 
-
-
     override fun setNewActiveFigure() {
         figures.removeLast()
         updateScore()

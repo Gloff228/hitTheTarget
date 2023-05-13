@@ -53,7 +53,7 @@ class FigureVegetable(
         val sproutX = (x + vegetableImg.width / 3).toFloat()
         val sproutY = (y + vegetableImg.height / 3).toFloat()
         if (!isActive)
-            canvas.drawBitmap(sproutImg, sproutX , sproutY, paint)
+            canvas.drawBitmap(sproutImg, sproutX, sproutY, paint)
         else
             canvas.drawBitmap(vegetableImg, x.toFloat(), y.toFloat(), paint)
     }

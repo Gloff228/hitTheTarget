@@ -15,8 +15,8 @@ class BackgroundScreen : MyActivity() {
     class MyView(context: Context) : View(context) {
         override fun onDraw(canvas: Canvas) {
             super.onDraw(canvas)
-            val figure = FigureSettingCircle(canvas.height)
-            figure.setPosition(canvas.height/2, canvas.height/2)
+            val figure = FigureSettingCircle(height)
+            figure.setPosition(height/2, height/2)
             figure.draw(canvas)
         }
     }
