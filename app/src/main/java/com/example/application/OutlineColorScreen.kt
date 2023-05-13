@@ -6,13 +6,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import com.example.application.level.figures.FigureComCircle
+import com.example.application.level.figures.FigureSettingCircle
 import com.example.application.utils.TargetColor
 
 class OutlineColorScreen : MyActivity() {
     class MyView(context: Context) : View(context) {
         override fun onDraw(canvas: Canvas) {
             super.onDraw(canvas)
-            val figure = FigureComCircle(canvas.height * 3)
+            val figure = FigureSettingCircle(canvas.height)
             figure.setPosition(canvas.height/2, canvas.height/2)
             figure.draw(canvas)
         }

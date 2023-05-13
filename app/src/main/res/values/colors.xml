@@ -7,6 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
 
+    <color name="background_seekBar">#55cccccc</color>
+
     <color name="background_white">#FFFFFF</color>
     <color name="background_gray">#676767</color>
     <color name="background_pink">#FD96F9</color>
