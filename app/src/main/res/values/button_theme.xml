@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ButtonTheme" parent="Base.Widget.AppCompat.Button.Colored">
+        <item name="android:background">@drawable/rounded_corner</item>
+
+        <item name="android:textColor">@color/white</item>
+    </style>
+</resources>
