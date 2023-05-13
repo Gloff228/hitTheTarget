@@ -120,7 +120,9 @@ class CommonLevelActivity: AbstractLevelActivity() {
     fun updateScore() {
         val newText = "${figuresNumber - figures.size}/${figuresNumber}"
         if (scoreView.text.toString() != newText) {
-            scoreView.setText(newText, TextView.BufferType.SPANNABLE)
+            runOnUiThread {
+                scoreView.setText(newText, TextView.BufferType.SPANNABLE)
+            }
         }
     }
 
@@ -134,9 +136,10 @@ class CommonLevelActivity: AbstractLevelActivity() {
             return
         }
         val newText = "${timeRemain / 1000}.${timeRemain % 1000 / 100} сек "
-//        durationView.text = newText
         if (durationView.text.toString() != newText) {
-            durationView.setText(newText, TextView.BufferType.SPANNABLE)
+            runOnUiThread {
+                durationView.setText(newText, TextView.BufferType.SPANNABLE)
+            }
         }
     }
 
