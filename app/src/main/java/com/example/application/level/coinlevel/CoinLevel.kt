@@ -21,6 +21,7 @@ class CoinLevel: AbstractLevelActivity() {
 
     private lateinit var coinList: MutableList<FigureCoin>
     lateinit var currentCoin: FigureCoin
+    var isRunning = true
     var coinCounter = 0
     var figuresNumber: Int = -1
     var figureSize: Int = -1
@@ -59,9 +60,9 @@ class CoinLevel: AbstractLevelActivity() {
     }
 
     override fun surfaceCreated(surfaceHolder: SurfaceHolder) {
-        canRun = true
+
         Thread {
-            while (canRun) {
+            while (isRunning) {
                 try {
                     drawNewFrame(surfaceHolder)
                     Thread.sleep(5)
@@ -139,6 +140,7 @@ class CoinLevel: AbstractLevelActivity() {
     }
 
     override fun finishLevel() {
+        isRunning = false
         val intent = Intent(this, CoinLevelResultActivity::class.java)
         intent.putExtra(CoinSettings.PARAM_FIGURES_NUMBER, figuresNumber)
         intent.putExtra(CoinSettings.PARAM_FIGURE_SIZE, figureSize)
@@ -151,6 +153,7 @@ class CoinLevel: AbstractLevelActivity() {
     }
 
     fun onClickReturnButton(view: View) {
+        isRunning = false
         finish()
     }
 }

@@ -15,6 +15,7 @@ import com.example.application.level.AbstractLevelActivity
 import com.example.application.level.figures.FigureBubble
 
 var bubSpeed: Int = -1
+
 class BubbleLevel: AbstractLevelActivity() {
 
     private lateinit var bubbleList: MutableList<FigureBubble>
@@ -149,6 +150,7 @@ class BubbleLevel: AbstractLevelActivity() {
     }
 
     fun onClickReturnButton(view: View) {
+        isRunning = false
         finish()
     }
 }
