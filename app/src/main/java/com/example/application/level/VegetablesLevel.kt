@@ -185,7 +185,7 @@ class VegetablesLevel : AbstractLevelActivity() {
             figures.last().setActive()
             needRedraw = true
         } else {
-            finishLevel()  // TODO add winning screen
+            finishLevel()
         }
     }
 
@@ -197,8 +197,11 @@ class VegetablesLevel : AbstractLevelActivity() {
     }
 
     override fun finishLevel() {
-        openResultScreen()
-        finish()
+        if (!threadQuit) {
+            threadQuit = true
+            openResultScreen()
+            finish()
+        }
     }
 
 
