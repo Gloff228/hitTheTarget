@@ -14,4 +14,6 @@
     <string name="cross">Cross</string>
     <string name="heart">Heart</string>
     <string name="returntostart">returnToStart</string>
+    <string name="back">Назад</string>
+    <string name="again">Ещё раз</string>
 </resources>

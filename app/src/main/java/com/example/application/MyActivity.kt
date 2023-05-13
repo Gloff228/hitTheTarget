@@ -32,9 +32,11 @@ open class MyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+    }
+    override fun onResume() {
+        super.onResume()
         hideElements()
     }
-
     override fun onStart() {
         super.onStart()
         setBackgroundColor(settings.backgroundColor)
@@ -44,8 +46,10 @@ open class MyActivity : AppCompatActivity() {
     fun hideElements() {
         window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_FULLSCREEN)
+                or View.SYSTEM_UI_FLAG_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
     }
 
     fun handleColorMode() {
