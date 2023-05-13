@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".BackgroundScreen">
 
+    <LinearLayout
+        android:id="@+id/circle"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout4"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout4">
+    </LinearLayout>
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
@@ -20,6 +31,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="wrap_content"
         android:layout_height="300dp"
         android:layout_margin="5dp"
@@ -60,8 +72,8 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:backgroundTint="@color/background_pink"
+                android:gravity="center"
                 android:onClick="selectPink"
                 android:textSize="20sp" />
         </LinearLayout>
@@ -77,8 +89,8 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:backgroundTint="@color/background_red"
+                android:gravity="center"
                 android:onClick="selectRed"
                 android:textSize="20sp" />
 
@@ -87,8 +99,8 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:backgroundTint="@color/background_blue"
+                android:gravity="center"
                 android:onClick="selectBlue"
                 android:textSize="20sp" />
 
@@ -97,8 +109,8 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:backgroundTint="@color/background_purple"
+                android:gravity="center"
                 android:onClick="selectPurple"
                 android:textSize="20sp" />
         </LinearLayout>
@@ -114,8 +126,8 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:backgroundTint="@color/background_yellow"
+                android:gravity="center"
                 android:onClick="selectYellow"
                 android:textSize="20sp" />
 
@@ -124,8 +136,8 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:backgroundTint="@color/background_green"
+                android:gravity="center"
                 android:onClick="selectGreen"
                 android:textSize="20sp" />
 
@@ -134,8 +146,8 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:backgroundTint="@color/background_aqua"
+                android:gravity="center"
                 android:onClick="selectAqua"
                 android:textSize="20sp" />
         </LinearLayout>
