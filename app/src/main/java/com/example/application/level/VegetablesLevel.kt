@@ -20,8 +20,8 @@ import kotlin.random.Random
 
 class VegetablesLevel : AbstractLevelActivity() {
 
-    var figuresNumber: Int = -1
-    var figureSize: Int = -1
+    var figuresNumber: Int = 200
+    var figureSize: Int = 200
 
     lateinit var scoreView: TextView
 
@@ -125,9 +125,7 @@ class VegetablesLevel : AbstractLevelActivity() {
             val vegetable = Bitmap.createScaledBitmap(vegetableImg, figureSize, figureSize, false)
             val sprout = Bitmap.createScaledBitmap(sproutImage, 90, 90, false)
 
-            //val position = generateRandomPosition(i % 3)
-            val position = Dot(Random.nextInt(0, WIDTH),
-                Random.nextInt(0, HEIGHT))
+            val position = generateRandomPosition(i % 3)
             val figure = FigureVegetable(vegetable, sprout)
             figure.setPosition(position.x - figureSize / 2, position.y - figureSize / 2)
             figure.bindLevel(this)
@@ -162,7 +160,7 @@ class VegetablesLevel : AbstractLevelActivity() {
 
     private fun getSettings() {
         figuresNumber = intent.getIntExtra(CommonLevelSettingsActivity.PARAM_FIGURES_NUMBER, -1)
-        figureSize = intent.getIntExtra(CommonLevelSettingsActivity.PARAM_FIGURE_SIZE, -1)
+        figureSize = intent.getIntExtra(CommonLevelSettingsActivity.PARAM_FIGURE_SIZE, 200)
     }
 
     override fun setBackgroundColor(canvas: Canvas) {
