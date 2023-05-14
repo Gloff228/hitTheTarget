@@ -10,9 +10,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
         android:scrollbarAlwaysDrawHorizontalTrack="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -25,7 +24,8 @@
             android:layout_marginTop="10dp"
             android:alignmentMode="alignBounds"
             android:columnCount="2"
-            android:padding="4dp"
+            android:layout_margin="4dp"
+            android:paddingBottom="10dp"
             android:rowOrderPreserved="false"
             android:useDefaultMargins="true">
 
@@ -318,14 +318,15 @@
             <Button
                 android:id="@+id/buttonStart"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="100dp"
                 android:layout_columnSpan="2"
                 android:layout_columnWeight="0"
                 android:layout_margin="5dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginTop="50dp"
                 android:onClick="onClickStartLevelButton"
                 android:text="Старт"
-                android:textSize="20sp" />
+                android:textSize="36sp" />
 
         </GridLayout>
 

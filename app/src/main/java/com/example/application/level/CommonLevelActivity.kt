@@ -101,7 +101,6 @@ class CommonLevelActivity: AbstractLevelActivity() {
     override fun finishLevel() {
         if (!threadQuit) {
             threadQuit = true
-            finishActivity(0)
             finish()
             openResultScreen()
         }

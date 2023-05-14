@@ -13,7 +13,7 @@ class CoinSettings: AbsLevelSettingsActivity() {
 
     override val SETTINGS = listOf(
         LevelSettingsItem(PARAM_FIGURES_NUMBER, 3,100, 1, 10),
-        LevelSettingsItem(PARAM_FIGURE_SIZE, 70,500, 1, 200),
+        LevelSettingsItem(PARAM_FIGURE_SIZE, 70,500, 10, 200),
         LevelSettingsItem(PARAM_SPEED, 1, 30, 1, 10),
     )
 
