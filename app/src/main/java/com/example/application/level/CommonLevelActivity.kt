@@ -96,6 +96,8 @@ class CommonLevelActivity: AbstractLevelActivity() {
         figureSize = intent.getIntExtra(CommonLevelSettingsActivity.PARAM_FIGURE_SIZE, -1)
         clickTime = intent.getIntExtra(CommonLevelSettingsActivity.PARAM_CLICK_TIME, -1) * 100
         isAllFigures = intent.getIntExtra(CommonLevelSettingsActivity.PARAM_IS_ALL_FIGURES, -1)
+        println("!!!")
+        println(isAllFigures)
     }
 
     override fun finishLevel() {
@@ -111,6 +113,7 @@ class CommonLevelActivity: AbstractLevelActivity() {
         intent.putExtra(CommonLevelSettingsActivity.PARAM_FIGURES_NUMBER, figuresNumber)
         intent.putExtra(CommonLevelSettingsActivity.PARAM_FIGURE_SIZE, figureSize)
         intent.putExtra(CommonLevelSettingsActivity.PARAM_CLICK_TIME, clickTime)
+        intent.putExtra(CommonLevelSettingsActivity.PARAM_IS_ALL_FIGURES, isAllFigures)
         intent.putExtra(PARAM_IS_WIN, isWin)
         startActivity(intent)
     }

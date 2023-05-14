@@ -15,6 +15,7 @@ class CommonLevelResultActivity: MyActivity() {
     var figuresNumber = -1
     var figureSize = -1
     var clickTime = -1
+    var isAllFigures = -1
 
     var isWin = false
 
@@ -45,6 +46,7 @@ class CommonLevelResultActivity: MyActivity() {
         figuresNumber = intent.getIntExtra(CommonLevelSettingsActivity.PARAM_FIGURES_NUMBER, -1)
         figureSize = intent.getIntExtra(CommonLevelSettingsActivity.PARAM_FIGURE_SIZE, -1)
         clickTime = intent.getIntExtra(CommonLevelSettingsActivity.PARAM_CLICK_TIME, -1) * 100
+        isAllFigures = intent.getIntExtra(CommonLevelSettingsActivity.PARAM_IS_ALL_FIGURES, -1)
 
         isWin = intent.getBooleanExtra(CommonLevelActivity.PARAM_IS_WIN, false)
     }
@@ -58,6 +60,7 @@ class CommonLevelResultActivity: MyActivity() {
         intent.putExtra(CommonLevelSettingsActivity.PARAM_FIGURES_NUMBER, figuresNumber)
         intent.putExtra(CommonLevelSettingsActivity.PARAM_FIGURE_SIZE, figureSize)
         intent.putExtra(CommonLevelSettingsActivity.PARAM_CLICK_TIME, clickTime / 10000)
+        intent.putExtra(CommonLevelSettingsActivity.PARAM_IS_ALL_FIGURES, isAllFigures)
         startActivity(intent)
         finish()
     }
