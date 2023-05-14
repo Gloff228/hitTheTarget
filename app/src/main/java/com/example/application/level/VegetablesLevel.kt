@@ -132,6 +132,7 @@ class VegetablesLevel : AbstractLevelActivity() {
 
             figures.addLast(figure)
         }
+        figures.shuffle()
         figures.last().setActive()
     }
 
@@ -177,14 +178,13 @@ class VegetablesLevel : AbstractLevelActivity() {
 
     @SuppressLint("SetTextI18n")
     fun updateScore() {
-        scoreView.text = "${figures.size}/${figuresNumber}"
+        scoreView.text = "${figuresNumber - figures.size}/${figuresNumber}"
     }
 
     override fun setNewActiveFigure() {
         figures.removeLast()
         updateScore()
         if (figures.isNotEmpty()) {
-            figures.shuffle()
             figures.last().setActive()
             needRedraw = true
         } else {

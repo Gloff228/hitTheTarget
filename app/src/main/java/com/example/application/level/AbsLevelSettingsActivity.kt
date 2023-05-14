@@ -147,7 +147,6 @@ open class AbsLevelSettingsActivity: MyActivity() {
         for ((name, value) in resultSettings) {
             levelIntent.putExtra(name, value)
         }
-        // TODO save settings to storage
         startActivity(levelIntent)
     }
 
