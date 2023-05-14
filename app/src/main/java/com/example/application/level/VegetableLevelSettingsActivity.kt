@@ -11,7 +11,7 @@ class VegetableLevelSettingsActivity: AbsLevelSettingsActivity() {
 
     override val SETTINGS = listOf(
         LevelSettingsItem(PARAM_FIGURES_NUMBER, 3,30, 1, 10),
-        LevelSettingsItem(PARAM_FIGURE_SIZE, 70,500, 5, 200),
+        LevelSettingsItem(PARAM_FIGURE_SIZE, 70,500, 10, 200),
     )
 
     override fun getLevelIntent(): Intent {
