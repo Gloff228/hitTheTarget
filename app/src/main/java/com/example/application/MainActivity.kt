@@ -15,6 +15,11 @@ class MainActivity : MyActivity() {
 
         restoreGlobalSettings()
     }
+    override fun onResume() {
+        super.onResume()
+        hideElements()
+        setBackgroundColor(settings.backgroundColor)
+    }
 
     fun onClickButtonStart(view: View) {
         startActivity(Intent(this, LevelMenu::class.java))
