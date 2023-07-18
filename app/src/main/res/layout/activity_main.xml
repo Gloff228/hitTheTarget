@@ -4,77 +4,157 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:screenOrientation="landscape"
     tools:context=".MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ImageView
+        android:id="@+id/imageViewUser"
+        android:layout_width="66dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:contentDescription="@string/user"
+        android:focusable="true"
+        android:onClick="onClickButtonUser"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/user" />
+
+    <ImageView
+        android:id="@+id/imageViewSettings"
+        android:layout_width="66dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:clickable="true"
+        android:contentDescription="@string/settings"
+        android:focusable="true"
+        android:onClick="onClickButtonSettings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/settings_button" />
+
+    <ImageView
+        android:id="@+id/imageViewStart"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clickable="true"
+        android:contentDescription="Start"
+        android:focusable="true"
+        android:onClick="onClickButtonStart"
+        android:scaleType="fitXY"
+        android:src="@drawable/start"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.7"
+        app:layout_constraintVertical_weight="1"
+        app:layout_constraintWidth_percent="0.25" />
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="UserName"
+        android:textColor="#373737"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewUser" />
+
+    <RelativeLayout
+        android:id="@+id/user_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background"
-        android:screenOrientation="landscape">
-
-        <ImageView
-            android:id="@+id/imageViewUser"
-            android:layout_width="66dp"
-            android:layout_height="53dp"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="16dp"
-            android:clickable="true"
-            android:contentDescription="@string/user"
-            android:focusable="true"
-            android:onClick="onClickButtonUser"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/user" />
-
-        <ImageView
-            android:id="@+id/imageViewSettings"
-            android:layout_width="66dp"
-            android:layout_height="53dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:clickable="true"
-            android:contentDescription="@string/settings"
-            android:focusable="true"
-            android:onClick="onClickButtonSettings"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/settings_button" />
-
-        <ImageView
-            android:id="@+id/imageViewStart"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:clickable="true"
-            android:contentDescription="Start"
-            android:focusable="true"
-            android:onClick="onClickButtonStart"
-            android:scaleType="fitXY"
-            android:src="@drawable/start"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="H,1:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.25"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.7"
-            app:layout_constraintVertical_weight="1"
-            app:layout_constraintWidth_percent="0.25" />
+        android:background="@color/white"
+        android:visibility="visible">
 
         <TextView
-            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="UserName"
-            android:textColor="#373737"
-            android:textSize="28sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewUser" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="false"
+            android:layout_marginTop="30dp"
+            android:text="Выбери пользователя"
+            android:textSize="42sp">
+
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button_user1"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15px"
+                android:onClick="onUser1ButtonClick"
+                android:text="Пользователь 1" />
+
+            <Button
+                android:id="@+id/button_user2"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:onClick="onUser2ButtonClick"
+                android:text="Пользователь 2" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/button_close"
+                android:layout_width="66dp"
+                android:layout_height="53dp"
+                android:clickable="true"
+                android:contentDescription="close"
+                android:focusable="true"
+                android:onClick="onClickCloseUserMenu"
+                app:srcCompat="@drawable/close" />
+
+            <ImageView
+                android:id="@+id/button_plus"
+                android:layout_width="66dp"
+                android:layout_height="53dp"
+                android:layout_marginTop="24dp"
+                android:clickable="true"
+                android:contentDescription="plus"
+                android:focusable="true"
+                android:onClick="onClickAddUser"
+                app:srcCompat="@drawable/plus" />
+
+            <ImageView
+                android:id="@+id/button_edit"
+                android:layout_width="66dp"
+                android:layout_height="53dp"
+                android:layout_marginTop="24dp"
+                android:clickable="true"
+                android:contentDescription="edit"
+                android:focusable="true"
+                android:onClick="onClickEditUser"
+                app:srcCompat="@drawable/pen" />
+        </LinearLayout>
+    </RelativeLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
